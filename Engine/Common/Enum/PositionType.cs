@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace XGameEngine.Graphics.GUI
+namespace XGameEngine
 {
     /// <summary>
     /// Specifies the position types.
     /// </summary>
-    public enum PositionOptions
+    public enum PositionType
     {
         /// <summary>
         /// Position is not relative to the parent.

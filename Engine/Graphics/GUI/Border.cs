@@ -14,12 +14,18 @@ namespace XGameEngine.Graphics.GUI
     public class Border : UIObject
     {
         /// <summary>
+        /// An array of lines to draw.
+        /// </summary>
+        private List<Rectangle> rects = new List<Rectangle>(4);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Border"/> class.
         /// </summary>
         /// <param name="game">The current game.</param>
-        public Border(XGame game)
-            : base(game)
+        public Border(UIObject child)
+            : base(child.Game)
         {
+            this.SetChild(child);
             this.thickness = new Thickness(0, 0, 0, 0);
         }
 
@@ -56,11 +62,23 @@ namespace XGameEngine.Graphics.GUI
             // Draw the base first.
             base.Draw(sprite, gameTime);
 
-            List<Rectangle> borders = new List<Rectangle>();
+            for (int i = 0; i < this.rects.Count; i++)
+            {
+                base.Game.Render.SpriteBatch.Draw
+                    (base.Game.EngineResource.Dummy, this.rects[i], this.Background);
+            }
 
-            int difference = (int)this.thickness.Spacing;
+            this.Flush();
+        }
 
+        /// <summary>
+        /// Update the border rectangles.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public override void Update(GameTime gameTime)
+        {
             Rectangle right, bottom, left, top;
+            int difference = (int)this.thickness.Spacing;
 
             // Create borders.
             right = new Rectangle
@@ -70,7 +88,7 @@ namespace XGameEngine.Graphics.GUI
 
             bottom = new Rectangle
                 ((int)this.child.Position.X - (int)this.thickness.Left - difference,
-                (int)this.child.Position.Y  + (int)this.child.ActualHeight + difference,
+                (int)this.child.Position.Y + (int)this.child.ActualHeight + difference,
                 (int)this.thickness.Left + (int)this.child.ActualWidth + (int)this.thickness.Right + (difference * 2), (int)this.thickness.Bottom);
 
             left = new Rectangle
@@ -82,17 +100,13 @@ namespace XGameEngine.Graphics.GUI
                 ((int)this.child.Position.X - (int)this.thickness.Left - difference,
                 (int)this.child.Position.Y - (int)this.thickness.Top - difference,
                 (int)this.thickness.Left + (int)this.child.ActualWidth + (int)this.thickness.Right + (difference * 2), (int)this.thickness.Top);
-                
-            borders.Add(right);
-            borders.Add(bottom);
-            borders.Add(left);
-            borders.Add(top);
 
-            for (int i = 0; i < borders.Count; i++)
-            {
-                base.Game.Render.SpriteBatch.Draw
-                    (base.Game.EngineResource.Dummy, borders[i], this.Background);
-            }
+            rects.Add(right);
+            rects.Add(bottom);
+            rects.Add(left);
+            rects.Add(top);
+
+            base.Update(gameTime);
         }
 
         /// <summary>
@@ -103,6 +117,14 @@ namespace XGameEngine.Graphics.GUI
         {
             // Set the parent.
             child.Parent = this;
+        }
+
+        /// <summary>
+        /// Delete the border lines.
+        /// </summary>
+        private void Flush()
+        {
+            this.rects.Clear();
         }
     }
 }

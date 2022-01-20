@@ -9,24 +9,13 @@ using XGameEngine.Logic;
 
 namespace XGameEngine.Logic
 {
-    public class MenuGameScreen : GameScreen
-    {        
-       /// <summary>
-       /// The current selected child.
-       /// </summary>
-       private int selectedIndex = -1;
-        
-       /// <summary>
-       /// Holds the style options.
-       /// </summary>
-       private TextMenuOptions styleOptions;
-
+    public abstract class MenuGameScreen : GameScreen
+    {
+        private int selectedIndex = -1;
+        private TextMenuOptions styleOptions;
         public MenuGameScreen(XGame game) : base(game)
         {
-        }
 
-        protected override void UpdateInput(GameTime gameTime)
-        {
         }
     }
 }

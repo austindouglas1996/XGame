@@ -23,7 +23,7 @@ namespace XGameEngine.Graphics.GUI
         /// <summary>
         /// Color of the background.
         /// </summary>
-        private Color background = new Color(255, 255, 255, 0);
+        private Color background = new Color(0, 0, 0, 0);
 
         /// <summary>
         /// Drawing depth of the element.
@@ -53,7 +53,7 @@ namespace XGameEngine.Graphics.GUI
         /// <summary>
         /// How we will handle positioning the element.
         /// </summary>
-        private PositionOptions positionOptions = PositionOptions.Relative;
+        private PositionType positionOptions = PositionType.Relative;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UIObject"/> class.
@@ -203,7 +203,7 @@ namespace XGameEngine.Graphics.GUI
         /// <summary>
         /// Gets the options when handling the position of this element.
         /// </summary>
-        public PositionOptions PositionOptions
+        public PositionType PositionOptions
         {
             get { return this.positionOptions; }
             set { this.positionOptions = value; }

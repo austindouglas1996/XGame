@@ -31,8 +31,7 @@ namespace Example01.Screens
             this.Children.Add(title);
 
             // Create a border and place the title as the child to be encased.
-            Border b = new Border(base.Game);
-            b.Child = title;
+            Border b = new Border(title);
             b.Background = new Color(0,0,0, 100);
             b.Thickness = new Thickness(30,30,30,30,0);
             this.Children.Add(b);
@@ -53,7 +52,7 @@ namespace Example01.Screens
 
             // PulseEffect: TextBlock, MinimumLoss, MaximumLoss, ChangeRate, DifferenceInChange.
             menuItems.Options.SelectedEffect = 
-                new PulseTextEffect(menuItems.Items[0], 0.01f, 0.4f, 0.0008f, TimeSpan.FromSeconds(0.4));
+                new TextEffectPulse(menuItems.Items[0], 0.01f, 0.4f, 0.0008f, TimeSpan.FromSeconds(0.4));
 
             // Add some asteroids.
             for (int i = 0; i < 50; i++)

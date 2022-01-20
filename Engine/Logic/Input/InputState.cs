@@ -35,11 +35,6 @@ namespace XGameEngine.Logic.Input
         };
 
         /// <summary>
-        /// Gets the distance the mouse has moved since the last update.
-        /// </summary>
-        private static Point mouseDistance = new Point(0, 0);
-
-        /// <summary>
         /// Gets the current gamepad state.
         /// </summary>
         /// <param name="player">The player to retrieve the data from.</param>
@@ -101,6 +96,7 @@ namespace XGameEngine.Logic.Input
         {
             get { return mouseDistance; }
         }
+        private static Point mouseDistance = new Point(0, 0);
 
         /// <summary>
         /// Gets a bool indicicating whether the mouse is within a rectangle.
@@ -127,6 +123,24 @@ namespace XGameEngine.Logic.Input
         }
 
         /// <summary>
+        /// Gets a bool indicating whether a button array is pressed. If any one button is pressed
+        /// true is returned.
+        /// </summary>
+        /// <param name="button">Array of buttons to check.</param>
+        /// <param name="playerIndex">Index of the player</param>
+        /// <param name="option">Preffered checking type.</param>
+        /// <returns></returns>
+        public static bool ButtonPressed(Buttons[] button, PlayerIndex playerIndex,
+            StateOptions option = StateOptions.Current)
+        {
+            foreach (Buttons b in button)
+                if (GetButtonBool(option, playerIndex, b, ButtonState.Pressed) == true)
+                    return true;
+
+            return false;
+        }
+
+        /// <summary>
         /// Gets a bool indicating whether a button is released.
         /// </summary>
         /// <param name="button">Button to be checked.</param>
@@ -137,6 +151,23 @@ namespace XGameEngine.Logic.Input
             StateOptions option = StateOptions.Current)
         {
             return GetButtonBool(option, playerIndex, button, ButtonState.Released);
+        }
+
+        /// <summary>
+        /// Gets a bool indicating whether a button array is released.
+        /// </summary>
+        /// <param name="button">Button to be checked.</param>
+        /// <param name="playerIndex">The player for the button to correspond to.</param>
+        /// <param name="option">Preffered checking type.</param>
+        /// <returns>bool</returns>
+        public static bool ButtonReleased(Buttons[] button, PlayerIndex playerIndex,
+            StateOptions option = StateOptions.Current)
+        {
+            foreach (Buttons b in button)
+                if (GetButtonBool(option, playerIndex, b, ButtonState.Released) == false)
+                    return true;
+
+            return false;
         }
 
         /// <summary>
@@ -176,6 +207,25 @@ namespace XGameEngine.Logic.Input
         }
 
         /// <summary>
+        /// Gets a bool indicating whether a key array is pressed.
+        /// </summary>
+        /// <param name="key">Key to be checked.</param>
+        /// <param name="playerIndex">The player for the button to correspond to.</param>
+        /// <param name="option">Preffered checking type.</param>
+        /// <returns>bool</returns>
+        public static bool KeyPressed(Keys[] keys, PlayerIndex playerIndex,
+            StateOptions option = StateOptions.Current)
+        {
+            foreach (var k in keys)
+            {
+                if (GetKeyBool(option, playerIndex, k, KeyState.Down))
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Gets a bool indicating whether a key is released.
         /// </summary>
         /// <param name="key">Key to be checked.</param>
@@ -186,6 +236,25 @@ namespace XGameEngine.Logic.Input
             StateOptions option = StateOptions.Current)
         {
             return GetKeyBool(option, playerIndex, key, KeyState.Up);
+        }
+
+        /// <summary>
+        /// Gets a bool indicating whether a key array is released.
+        /// </summary>
+        /// <param name="key">Key to be checked.</param>
+        /// <param name="playerIndex">The player for the button to correspond to.</param>
+        /// <param name="option">Preffered checking type.</param>
+        /// <returns>bool</returns>
+        public static bool KeyReleased(Keys[] keys, PlayerIndex playerIndex,
+            StateOptions option = StateOptions.Current)
+        {
+            foreach (var k in keys)
+            {
+                if (GetKeyBool(option, playerIndex, k, KeyState.Up))
+                    return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -282,6 +351,28 @@ namespace XGameEngine.Logic.Input
                     return "x";
                 case Keys.Z:
                     return "z";
+                case Keys.NumPad0:
+                    return "0";
+                case Keys.NumPad1:
+                    return "1";
+                case Keys.NumPad2:
+                    return "2";
+                case Keys.NumPad3:
+                    return "3";
+                case Keys.NumPad4:
+                    return "4";
+                case Keys.NumPad5:
+                    return "5";
+                case Keys.NumPad6:
+                    return "6";
+                case Keys.NumPad7:
+                    return "7";
+                case Keys.NumPad8:
+                    return "8";
+                case Keys.NumPad9:
+                    return "9";
+                case Keys.Space:
+                    return " ";
             }
 
             return string.Empty;

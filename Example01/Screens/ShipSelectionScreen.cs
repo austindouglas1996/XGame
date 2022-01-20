@@ -119,6 +119,9 @@ namespace Example01.Screens
                 new Vector2(base.Game.View.Width - menu.ActualWidth - 400, base.Game.View.Height - menu.ActualHeight - 150),
                 this.BackClick);
 
+
+            options.SelectedEffect = new TextEffectPulse(menu.Items[0], 0.01f, 0.4f, 0.0008f, TimeSpan.FromSeconds(0.4));
+
             this.Children.Add(menu);
 
             PrepareShipSprites();

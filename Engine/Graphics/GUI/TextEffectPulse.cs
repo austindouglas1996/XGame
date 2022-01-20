@@ -11,7 +11,7 @@ namespace XGameEngine.Graphics.GUI
     /// <summary>
     /// Creates a simple pulsing effect with a <see cref="UITextObject"/> to increase and lower the scale.
     /// </summary>
-    public class PulseTextEffect : TextEffect
+    public class TextEffectPulse : TextEffect
     {
         /// <summary>
         /// The amount of time between each change.
@@ -49,14 +49,14 @@ namespace XGameEngine.Graphics.GUI
         private bool Increasing = true;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PulseTextEffect"/> class.
+        /// Initializes a new instance of the <see cref="TextEffectPulse"/> class.
         /// </summary>
         /// <param name="text">Object to modify.</param>
         /// <param name="scaleMin">The lowest scale value we can go.</param>
         /// <param name="scaleMax">The highest scale value we can go.</param>
         /// <param name="rate">The amount to change per pulse.</param>
         /// <param name="diff">The amount of time to wait between each pulse.</param>
-        public PulseTextEffect(UITextObject text, float scaleMin, float scaleMax, float rate, TimeSpan diff)
+        public TextEffectPulse(UITextObject text, float scaleMin, float scaleMax, float rate, TimeSpan diff)
             : base(text)
         {
             _Original = text.Scale; 

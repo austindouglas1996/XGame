@@ -9,10 +9,10 @@ namespace Example01
 {
     public static class GlobalKeys
     {
-        public static Keys RaiseKey = Keys.W;
-        public static Keys LowerKey = Keys.S;
-        public static Keys RightSideKey = Keys.D;
-        public static Keys LeftSideKey = Keys.A;
+        public static Keys[] RaiseKey = new Keys[] { Keys.W, Keys.Up };
+        public static Keys[] LowerKey = new Keys[] { Keys.S, Keys.Down };
+        public static Keys[] RightSideKey = new Keys[] { Keys.D, Keys.Right };
+        public static Keys[] LeftSideKey = new Keys[] { Keys.A, Keys.Left };
 
         public static Keys ShootKey = Keys.X;
         public static Keys ActionKey = Keys.Space;

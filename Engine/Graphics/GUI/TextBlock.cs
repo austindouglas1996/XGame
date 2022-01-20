@@ -15,6 +15,18 @@ namespace XGameEngine.Graphics.GUI
         /// <summary>
         /// Initializes a new instance of the <see cref="TextBlock"/> class.
         /// </summary>
+        /// <param name="obj">Parent element.</param>
+        /// <param name="text">Text to be displayed.</param>
+        /// <param name="pos">Position of the element.</param>
+        public TextBlock(UIObject obj, string text, Vector2 pos)
+            : this(obj.Game, text, pos)
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TextBlock"/> class.
+        /// </summary>
         /// <param name="game"></param>
         public TextBlock(XGame game, string text, Vector2 pos)
             : base(game)

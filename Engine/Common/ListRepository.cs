@@ -23,9 +23,10 @@ namespace XGameEngine.Common
         /// Initializes a new instance of the <see cref="ListRepository{TEntity}"/> class.
         /// </summary>
         /// <param name="entities"></param>
-        public ListRepository(List<TEntity> entities)
+        public ListRepository(List<TEntity> entities, GameObject owner = null)
         {
             _Entities = entities;
+            Owner = owner;
         }
 
         /// <summary>

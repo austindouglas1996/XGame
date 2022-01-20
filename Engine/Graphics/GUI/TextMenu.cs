@@ -11,11 +11,18 @@ using XGameEngine.Logic.Input;
 
 namespace XGameEngine.Graphics.GUI
 {
-    public class TextMenu : TextBlock
+    /// <summary>
+    /// Represents a container with selectable textblock elements.
+    /// </summary>
+    public class TextMenu : Container
     {   
-        public TextMenu(XGame game) : base(game, "", new Vector2(0,0))
+        /// <summary>
+        /// Initializes a new instance of <see cref="TextMenu"/> class.
+        /// </summary>
+        /// <param name="game"></param>
+        public TextMenu(XGame game) 
+            : base(game)
         {
-            this.Items = new ListRepository<TextBlock>();
         }        
 
         /// <summary>           

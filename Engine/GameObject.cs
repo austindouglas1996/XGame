@@ -180,7 +180,7 @@ namespace XGameEngine
                 Vector2 sp = new Vector2(this.position.X, this.position.Y);
 
                 // Only add the parent position if this is a child element.
-                if (this.PositionType == PositionType.Relative && this.Parent != null)
+                if (this.PositionType == Common.PositionType.Relative && this.Parent != null)
                     sp = sp + this.Parent.position;
 
                 return sp;
@@ -190,12 +190,12 @@ namespace XGameEngine
         /// <summary>
         /// Gets or sets the value detailing how to handle with rendering with a parent.
         /// </summary>
-        public PositionType PositionType
+        public Common.PositionType PositionType
         {
             get { return _PositionType; }
             set { this._PositionType = value; }
         }
-        private PositionType _PositionType = PositionType.Relative;
+        private Common.PositionType _PositionType = Common.PositionType.Relative;
 
         /// <summary>
         /// Dispose of game object contents.
