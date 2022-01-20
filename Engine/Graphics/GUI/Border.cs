@@ -25,7 +25,7 @@ namespace XGameEngine.Graphics.GUI
         public Border(UIObject child)
             : base(child.Game)
         {
-            this.SetChild(child);
+            this.Child = child;
             this.thickness = new Thickness(0, 0, 0, 0);
         }
 

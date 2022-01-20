@@ -23,6 +23,7 @@ namespace XGameEngine.Graphics.GUI
         public TextMenu(XGame game) 
             : base(game)
         {
+            this.Items = new ListRepository<TextBlock>();
         }        
 
         /// <summary>           
@@ -115,17 +116,6 @@ namespace XGameEngine.Graphics.GUI
                 if (i != this.selectedIndex)
                 {
                     // Make sure the child has the correct foreground.
-                    if (!this.Items[i].IsActive
-                        && this.Items[i].Foreground != this.styleOptions.InActiveForeground)
-                    {
-                        this.Items[i].Foreground = this.styleOptions.InActiveForeground;
-                    }
-                    else if (this.Items[i].IsActive
-                        && this.Items[i].Foreground == this.styleOptions.InActiveForeground)
-                    {
-                        this.Items[i].Foreground = this.styleOptions.Foreground;
-                    }
-                    else
                     if (this.Items[i].Foreground != this.styleOptions.Foreground)
                     {
                         this.Items[i].Foreground = this.styleOptions.Foreground;

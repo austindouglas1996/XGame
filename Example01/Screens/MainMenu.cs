@@ -45,7 +45,7 @@ namespace Example01.Screens
             TextMenu menuItems = new TextMenu(base.Game);
             menuItems.Options = options;
             menuItems.Add("Play", new Vector2(title.Position.X, 300), PlayGame);
-            menuItems.Add("Options", new Vector2(title.Position.X, 365));
+            menuItems.Add("Options", new Vector2(title.Position.X, 365), Options);
             menuItems.Add("Leaderboard", new Vector2(title.Position.X, 430));
             menuItems.Add("Exit", new Vector2(title.Position.X, 495));
             this.Children.Add(menuItems);
@@ -68,6 +68,11 @@ namespace Example01.Screens
         private void PlayGame(object sender, EventArgs e)
         {
             base.Game.Screens.Push(new ShipSelectionScreen(this.Game));
+        }
+
+        private void Options(object sender, EventArgs e)
+        {
+            base.Game.Screens.Push(new OptionsScreen(this.Game));
         }
     }
 }

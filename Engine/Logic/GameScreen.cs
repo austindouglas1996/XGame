@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using XGameEngine.Core;
-using XGameEngine.Extenders;
 
 namespace XGameEngine.Logic
 {

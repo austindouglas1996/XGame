@@ -41,5 +41,9 @@ namespace Example01.Screens
         {
             base.Draw(sprite, gameTime);
         }
+
+        protected override void UpdateInput(GameTime gameTime)
+        {
+        }
     }
 }

@@ -98,8 +98,7 @@ namespace Example01.Screens
             title.Background = new Color(0, 0, 0, 100);
             this.Children.Add(title);
 
-            Border b = new Border(this.Game);
-            b.Child = title;
+            Border b = new Border(title);
             b.Thickness = new Thickness(20);
             b.Background = new Color(0, 0, 0, 100);
             this.Children.Add(b);
@@ -261,6 +260,10 @@ namespace Example01.Screens
             {
                 return Sprites[index].Texture;
             }
+        }
+
+        protected override void UpdateInput(GameTime gameTime)
+        {
         }
     }
 }

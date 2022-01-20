@@ -51,11 +51,6 @@ namespace XGameEngine.Graphics.GUI
         private int width = 1;
 
         /// <summary>
-        /// How we will handle positioning the element.
-        /// </summary>
-        private PositionType positionOptions = PositionType.Relative;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UIObject"/> class.
         /// </summary>
         public UIObject(XGame game)
@@ -198,15 +193,6 @@ namespace XGameEngine.Graphics.GUI
         {
             get { return new Rectangle
                 ((int)this.Position.X, (int)this.Position.Y, this.ActualWidth, this.ActualHeight); }
-        }
-
-        /// <summary>
-        /// Gets the options when handling the position of this element.
-        /// </summary>
-        public PositionType PositionOptions
-        {
-            get { return this.positionOptions; }
-            set { this.positionOptions = value; }
         }
 
         /// <summary>
