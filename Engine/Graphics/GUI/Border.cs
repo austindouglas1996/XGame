@@ -14,16 +14,6 @@ namespace XGameEngine.Graphics.GUI
     public class Border : UIObject
     {
         /// <summary>
-        /// The thickness of the child.
-        /// </summary>
-        private Thickness thickness;
-
-        /// <summary>
-        /// The border child.
-        /// </summary>
-        private UIObject child;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Border"/> class.
         /// </summary>
         /// <param name="game">The current game.</param>
@@ -41,7 +31,8 @@ namespace XGameEngine.Graphics.GUI
             get { return this.thickness; }
             set { this.thickness = value; }
         }
-
+        private Thickness thickness;
+        
         /// <summary>
         /// Gets or sets the child to render around.
         /// </summary>
@@ -54,6 +45,7 @@ namespace XGameEngine.Graphics.GUI
                 this.SetChild(value);
             }
         }
+        private UIObject child;
 
         /// <summary>
         /// Draw the border element.
@@ -90,13 +82,7 @@ namespace XGameEngine.Graphics.GUI
                 ((int)this.child.Position.X - (int)this.thickness.Left - difference,
                 (int)this.child.Position.Y - (int)this.thickness.Top - difference,
                 (int)this.thickness.Left + (int)this.child.ActualWidth + (int)this.thickness.Right + (difference * 2), (int)this.thickness.Top);
-
-
-
-
-
-
-
+                
             borders.Add(right);
             borders.Add(bottom);
             borders.Add(left);
