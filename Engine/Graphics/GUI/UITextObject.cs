@@ -26,9 +26,6 @@ namespace XGameEngine.Graphics.GUI
 
             // Create a new list of effects.
             this.TextEffects = new List<TextEffect>();
-
-            // Default background should be transparent.
-            this.Background = new Color(0, 0, 0, 0);
         }
 
         /// <summary>
