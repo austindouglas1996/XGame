@@ -94,6 +94,11 @@ namespace XGameEngine.Graphics.GUI
         public event EventHandler UpdateCall;
 
         /// <summary>
+        /// Raised when the size of the element changes.
+        /// </summary>
+        public event EventHandler SizeChange;
+
+        /// <summary>
         /// Gets a value indicating whether the mouse is over this element.
         /// </summary>
         public bool MouseIsOver
@@ -333,6 +338,16 @@ namespace XGameEngine.Graphics.GUI
             {
                 this.UpdateCall(this, e);
             }
+        }
+
+        /// <summary>
+        /// Raised when the object size changes.
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnSizeChange(EventArgs e)
+        {
+            if (this.SizeChange != null)
+                this.SizeChange(this, e);
         }
     }
 }

@@ -72,7 +72,6 @@ namespace XGameEngine.Helpers
         public static float GetRandomFloat(float min, float max)
         {
             return (float)Math.Round(GetNextDouble() * (max - min - 1)) + min;
-
         }
 
         /// <summary>

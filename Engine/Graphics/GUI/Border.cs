@@ -54,6 +54,15 @@ namespace XGameEngine.Graphics.GUI
         private UIObject child;
 
         /// <summary>
+        /// Initialize the element and create the border.
+        /// </summary>
+        public override void Initialize()
+        {
+            this.CreateBorder();
+            base.Initialize();
+        }
+
+        /// <summary>
         /// Draw the border element.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
@@ -67,8 +76,6 @@ namespace XGameEngine.Graphics.GUI
                 base.Game.Render.SpriteBatch.Draw
                     (base.Game.EngineResource.Dummy, this.rects[i], this.Background);
             }
-
-            this.Flush();
         }
 
         /// <summary>
@@ -77,6 +84,28 @@ namespace XGameEngine.Graphics.GUI
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
+        }
+
+        /// <summary>
+        /// Set the element child.
+        /// </summary>
+        /// <param name="child">Child.</param>
+        protected void SetChild(UIObject child)
+        {
+            // Set the parent.
+            child.Parent = this;
+            child.PositionChange += (obj, e) => CreateBorder();
+            child.SizeChange += (obj, e) => CreateBorder();
+        }
+
+        /// <summary>
+        /// Create the border around the element.
+        /// </summary>
+        protected void CreateBorder()
+        {
+            this.Flush();
+
             Rectangle right, bottom, left, top;
             int difference = (int)this.thickness.Spacing;
 
@@ -105,18 +134,6 @@ namespace XGameEngine.Graphics.GUI
             rects.Add(bottom);
             rects.Add(left);
             rects.Add(top);
-
-            base.Update(gameTime);
-        }
-
-        /// <summary>
-        /// Set the element child.
-        /// </summary>
-        /// <param name="child">Child.</param>
-        protected void SetChild(UIObject child)
-        {
-            // Set the parent.
-            child.Parent = this;
         }
 
         /// <summary>

@@ -26,10 +26,12 @@ namespace Example01
         public static List<ShipResource> Ships = new List<ShipResource>();
         public static List<ProjectileResource> Projectiles = new List<ProjectileResource>();
         public static List<MeteorResource> Meteors = new List<MeteorResource>();
+        public static List<UFOResource> UFOs = new List<UFOResource>();
 
         public static List<ResourceInfo<Texture2D>> ShipTextures = new List<ResourceInfo<Texture2D>>();
         public static List<ResourceInfo<Texture2D>> ShipIconTextures = new List<ResourceInfo<Texture2D>>();
         public static List<ResourceInfo<Texture2D>> ProjectileTextures = new List<ResourceInfo<Texture2D>>();
+        public static List<ResourceInfo<Texture2D>> UFOTextures = new List<ResourceInfo<Texture2D>>();
         public static List<ResourceInfo<Texture2D>> MeteorTextures = new List<ResourceInfo<Texture2D>>();
         public static List<ResourceInfo<Texture2D>> NumberTextures = new List<ResourceInfo<Texture2D>>();
 
@@ -52,6 +54,7 @@ namespace Example01
             ShipIconTextures = LoadTextures(resource, ExeDir + @"\Content\\Textures\UI\Icons\", "PlayerShipLifeIcon");
             ProjectileTextures = LoadTextures(resource, ExeDir + @"\Content\Textures\Projectiles\", "Projectiles");
             MeteorTextures = LoadTextures(resource, ExeDir + @"\Content\Textures\Meteors\", "Meteors");
+            UFOTextures = LoadTextures(resource, ExeDir + @"\Content\Textures\Ships\UFO\", "UFOShip");
             NumberTextures = LoadTextures(resource, ExeDir + @"\Content\Textures\UI\Numbers\", "Numbers");
 
             // Load projectile sound.
@@ -61,6 +64,7 @@ namespace Example01
             CreateShipResources();
             CreateProjectileResources();
             CreateMeteorResources();
+            CreateUFOResources();
         }
 
         /// <summary>
@@ -184,6 +188,19 @@ namespace Example01
 
                 // Add.
                 Meteors.Add(resource);
+            }
+        }
+
+        /// <summary>
+        /// Create UFO resources.
+        /// </summary>
+        private static void CreateUFOResources()
+        {
+            foreach (ResourceInfo<Texture2D> text in UFOTextures)
+            {
+                UFOResource resource = new UFOResource(text.Resource);
+                resource.Projectile = Projectiles[2];
+                UFOs.Add(resource);
             }
         }
     }

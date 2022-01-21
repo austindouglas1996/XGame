@@ -59,6 +59,11 @@ namespace Example01.Screens
 
         public override void Update(GameTime gameTime)
         {
+            if (InputState.KeyPressed(Microsoft.Xna.Framework.Input.Keys.J, PlayerIndex.One, StateOptions.CurrentFavor))
+            {
+                Game1.World.AddUFORandom();
+            }
+
             base.Update(gameTime);
         }
         protected override void UpdateInput(GameTime gameTime)

@@ -38,12 +38,15 @@ namespace Example01
         /// </summary>
         private List<Color> StarsColors = new List<Color>();
 
+        public PlayerShip Player { get; set; }
+
         /// <summary>
         /// Add a player to the world.
         /// </summary>
         /// <param name="ship"></param>
         public void AddPlayer(PlayerShip ship)
         {
+            Player = ship;
             this.Children.Add(ship);
         }
 
@@ -63,6 +66,27 @@ namespace Example01
         public void AddMeteor(Meteor meteor)
         {
             this.Children.Add(meteor);
+        }
+
+        /// <summary>
+        /// Add a UFO to the world.
+        /// </summary>
+        /// <param name="ship"></param>
+        public void AddUFO(UFOShip ship)
+        {
+            this.Children.Add(ship);
+        }
+
+        /// <summary>
+        /// Add a random UFO.
+        /// </summary>
+        public void AddUFORandom()
+        {
+            int resourceIndex = RandomNum.Next(0, Resources.UFOs.Count());
+            UFOResource resource = Resources.UFOs[resourceIndex];
+
+            UFOShip ufo = new UFOShip(this.Game, resource, Color.White);
+            this.AddUFO(ufo);
         }
 
         /// <summary>

@@ -80,6 +80,11 @@ namespace XGameEngine
         public event EventHandler VisibilityChange;
 
         /// <summary>
+        /// Raised when the position of the element changes.
+        /// </summary>
+        public event EventHandler PositionChange;
+
+        /// <summary>
         /// Raised when Draw() is first called.
         /// </summary>
         protected event EventHandler FirstDraw;
@@ -165,8 +170,12 @@ namespace XGameEngine
         /// </summary>
         public Vector2 Position
         {
-            get { return this.position; }
-            set { this.position = value; }
+            get { return this.position; } 
+            set 
+            { 
+                this.position = value; 
+                this.OnPositionChange(EventArgs.Empty);
+            }
         }
         private Vector2 position;
 
@@ -312,6 +321,16 @@ namespace XGameEngine
             {
                 this.VisibilityChange(this, e);
             }
+        }
+
+        /// <summary>
+        /// Raised when the object position changes.
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnPositionChange(EventArgs e)
+        {
+            if (this.PositionChange != null)
+                this.PositionChange(this, e);
         }
     }
 }

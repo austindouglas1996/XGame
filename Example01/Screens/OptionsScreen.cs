@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Example01.Logic;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,11 @@ namespace Example01.Screens
 
             if (InputState.KeyPressed(Microsoft.Xna.Framework.Input.Keys.H, PlayerIndex.One, StateOptions.CurrentFavor))
                 p.CurrentProgress -= 10;
+
+            if (InputState.KeyPressed(Microsoft.Xna.Framework.Input.Keys.J, PlayerIndex.One, StateOptions.CurrentFavor))
+            {
+                Game1.World.AddUFORandom();
+            }
         }
     }
 }

@@ -8,21 +8,21 @@
         /// <summary>
         /// Direction left.
         /// </summary>
-        Left,
+        Left = 0,
 
         /// <summary>
         /// Direction top.
         /// </summary>
-        Top,
+        Top = 2,
 
         /// <summary>
         /// Direction right.
         /// </summary>
-        Right,
+        Right = 1,
 
         /// <summary>
         /// Direction down.
         /// </summary>
-        Bottom
+        Bottom = 3
     }
 }
