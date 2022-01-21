@@ -35,10 +35,10 @@ namespace Example01.Screens
         protected override void UpdateInput(GameTime gameTime)
         {
             if (InputState.KeyPressed(Microsoft.Xna.Framework.Input.Keys.F, PlayerIndex.One, StateOptions.CurrentFavor))
-                p._CurrentProgress += 10;
+                p.CurrentProgress += 10;
 
             if (InputState.KeyPressed(Microsoft.Xna.Framework.Input.Keys.H, PlayerIndex.One, StateOptions.CurrentFavor))
-                p._CurrentProgress -= 10;
+                p.CurrentProgress -= 10;
         }
     }
 }

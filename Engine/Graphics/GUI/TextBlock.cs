@@ -21,7 +21,6 @@ namespace XGameEngine.Graphics.GUI
         public TextBlock(UIObject obj, string text, Vector2 pos)
             : this(obj.Game, text, pos)
         {
-
         }
 
         /// <summary>

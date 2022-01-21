@@ -79,7 +79,7 @@ namespace Example01.Logic
             ShipProjectile project = new ShipProjectile
                 (this.Game, this, this.Projectile, this.Position, this.Velocity, Color.White);
             project.Initialize();
-            project.PositionType = XGameEngine.Common.PositionType.Absolute;
+            project.PositionType = PositionType.Absolute;
 
             Game1.World.AddProjectile(project);
         }

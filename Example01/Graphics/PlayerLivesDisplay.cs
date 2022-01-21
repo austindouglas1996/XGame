@@ -77,6 +77,7 @@ namespace Example01.Screens
 
             // Create the default text label.
             TextBlock label = new TextBlock(this.Game, "Lives:", Vector2.Zero);
+            label.Scale = Resources.MenuItemScale;
             label.Foreground = Color.White;
             label.Position = new Vector2(50, (this.Height - label.ActualHeight) / 2);
             this.Children.Add(label);

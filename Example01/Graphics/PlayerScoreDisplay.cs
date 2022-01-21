@@ -34,14 +34,14 @@ namespace Example01.Graphics
             // Create the default text label.
             TextBlock label = new TextBlock(this.Game, "SCORE", Vector2.Zero);
             label.Foreground = Color.White;
-            label.Scale = 1.2f;
+            label.Scale = Resources.MenuItemScale;
             label.Position = new Vector2
                 ((this.ActualWidth - label.ActualWidth) /2, 20);
             this.Children.Add(label);
 
             Score = new TextBlock(this.Game, "0", Vector2.Zero);
             Score.Foreground = Color.White;
-            Score.Scale = 1.3f;
+            Score.Scale = Resources.MenuItemScale;
             Score.TextChanged += (obj, e) =>
             {
                 Score.Position = new Vector2

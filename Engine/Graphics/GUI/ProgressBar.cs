@@ -28,6 +28,16 @@ namespace XGameEngine.Graphics.GUI
         }
 
         /// <summary>
+        /// Invoked when <see cref="CurrentProgress"/> has changed.
+        /// </summary>
+        public event EventHandler ProgressChanged;
+
+        /// <summary>
+        /// Invoked when <see cref="CurrentProgress"/> equals <see cref="MaxProgress"/>.
+        /// </summary>
+        public event EventHandler ProgressCompleted;
+
+        /// <summary>
         /// Gets or sets the current progress of the bar.
         /// </summary>
         public double CurrentProgress
@@ -36,8 +46,13 @@ namespace XGameEngine.Graphics.GUI
             set
             {
                 _CurrentProgress = value;
-                if (_CurrentProgress > MaxProgress)
-                    _CurrentProgress = MaxProgress;
+                if (CurrentProgress >= MaxProgress)
+                {
+                    CurrentProgress = MaxProgress;
+                    this.OnProgressCompleted(EventArgs.Empty);
+                }
+
+                this.OnProgressChanged(EventArgs.Empty);
             }
         }
         private double _CurrentProgress = 0;
@@ -73,11 +88,6 @@ namespace XGameEngine.Graphics.GUI
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            double percent = (_CurrentProgress / _MaxProgress) * 100;
-            double length = (percent * this.Width) / 100;
-
-            _Bar = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)length, this.Height);
-
             base.Update(gameTime);
         }
 
@@ -90,6 +100,31 @@ namespace XGameEngine.Graphics.GUI
         {
             base.Draw(sprite, gameTime);
             sprite.Draw(base.Game.EngineResource.Dummy, _Bar, _Progress);
+        }
+
+        /// <summary>
+        /// Invokes the <see cref="ProgressChanged"/> event.
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnProgressChanged(EventArgs e)
+        {
+            double percent = (CurrentProgress / MaxProgress) * 100;
+            double length = (percent * this.Width) / 100;
+
+            _Bar = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)length, this.Height);
+
+            if (this.ProgressChanged != null)
+                this.ProgressChanged(this, e);
+        }
+
+        /// <summary>
+        /// Invokes the <see cref="ProgressCompleted"/> event.
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnProgressCompleted(EventArgs e)
+        {
+            if (this.ProgressCompleted != null)
+                this.ProgressCompleted(this, e);
         }
     }
 }

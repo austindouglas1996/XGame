@@ -92,7 +92,7 @@ namespace Example01.Screens
         {            
             // Create the title block. Middle of the screen.
             TextBlock title = new TextBlock(base.Game, "SELECT YOUR SHIP!", Vector2.Zero);
-            title.Scale = 2f;
+            title.Scale = Resources.TitleScale;
             title.Foreground = Color.White;
             title.Position = new Vector2((base.Game.View.Width - title.ActualWidth) / 2, 250);
             title.Background = new Color(0, 0, 0, 100);
@@ -112,14 +112,16 @@ namespace Example01.Screens
             menu.Options = options;
             menu.Add("PLAY!", 
                 new Vector2(base.Game.View.Width - menu.ActualWidth - 200, base.Game.View.Height - menu.ActualHeight - 150),
+                Resources.MenuItemScale,
                 this.PlayClick);
 
             menu.Add("BACK",
                 new Vector2(base.Game.View.Width - menu.ActualWidth - 400, base.Game.View.Height - menu.ActualHeight - 150),
+                Resources.MenuItemScale,
                 this.BackClick);
 
 
-            options.SelectedEffect = new TextEffectPulse(menu.Items[0], 0.01f, 0.4f, 0.0008f, TimeSpan.FromSeconds(0.4));
+            options.SelectedEffect = new TextEffectPulse(menu.Items[0], 0.01f, 0.2f, 0.0002f, TimeSpan.FromSeconds(0.4));
 
             this.Children.Add(menu);
 

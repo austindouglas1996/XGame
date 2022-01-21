@@ -18,6 +18,11 @@ namespace Example01
     {
         public static Color MenuSelectedForecolor = new Color(255, 5, 130);
 
+        public static readonly float TitleScale = 0.9f;
+        public static readonly float MenuItemScale = 0.5f;
+
+        public static SpriteFont TitleFont;
+
         public static List<ShipResource> Ships = new List<ShipResource>();
         public static List<ProjectileResource> Projectiles = new List<ProjectileResource>();
         public static List<MeteorResource> Meteors = new List<MeteorResource>();
@@ -38,6 +43,9 @@ namespace Example01
         public static void LoadContent(ResourceLoader resource)
         {
             string ExeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            // Load font.
+            TitleFont = resource.Load<SpriteFont>("Title");
 
             // Load textures.
             ShipTextures = LoadTextures(resource, ExeDir + @"\Content\Textures\Ships\", "PlayerShip");

@@ -73,7 +73,7 @@ namespace Example01.Logic
             : base(game, parent.Texture, parent.Position, parent.Color)
         {
             // Increase or decrease the velocity of the meteor.
-            this.Velocity += parent.Velocity * Game1.Rand.Next(-4, 4);
+            this.Velocity += parent.Velocity * Game1.Rand.Next(-6, 6);
 
             // Decrease the size of the meteor by at least 1 (If possible).
             bool sizeChanged = false;
@@ -177,8 +177,8 @@ namespace Example01.Logic
 
             // Set random velocity speed.
             this.Velocity = new Vector2(
-                (float)RandomNum.GetNextDouble() * ((float)RandomNum.GetNextDouble(-1.6, 1.6) - 1),
-                (float)RandomNum.GetNextDouble() * ((float)RandomNum.GetNextDouble(-1.6, 1.6) - 1));
+                (float)RandomNum.GetNextDouble() * ((float)RandomNum.GetNextDouble(-2f, 2f) - 1),
+                (float)RandomNum.GetNextDouble() * ((float)RandomNum.GetNextDouble(-2f, 2f) - 1));
 
             // Set random rotation and rotation speed.
             this.Rotation = (float)RandomNum.GetNextDouble()

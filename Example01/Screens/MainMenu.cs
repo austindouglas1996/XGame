@@ -24,8 +24,9 @@ namespace Example01.Screens
         {
             // Create the title block. Middle of the screen.
             TextBlock title = new TextBlock(base.Game, "Asteroids 2D", Vector2.Zero);
+            title.Font = Resources.TitleFont;
             title.Foreground = Color.White;
-            title.Scale = 2.0f;
+            title.Scale = Resources.TitleScale;
             title.Position = new Vector2((base.Game.View.Width - title.ActualWidth) / 2, 150); 
             title.Background = new Color(0, 0, 0, 100);
             this.Children.Add(title);
@@ -43,16 +44,17 @@ namespace Example01.Screens
 
             // Create the menu items and add to the window.
             TextMenu menuItems = new TextMenu(base.Game);
+            menuItems.Scale = 0.5f;
             menuItems.Options = options;
-            menuItems.Add("Play", new Vector2(title.Position.X, 300), PlayGame);
-            menuItems.Add("Options", new Vector2(title.Position.X, 365), Options);
-            menuItems.Add("Leaderboard", new Vector2(title.Position.X, 430));
-            menuItems.Add("Exit", new Vector2(title.Position.X, 495));
+            menuItems.Add("Play", new Vector2(title.Position.X, 310), Resources.MenuItemScale, PlayGame);
+            menuItems.Add("Options", new Vector2(title.Position.X, 385), Resources.MenuItemScale, Options);
+            menuItems.Add("Leaderboard", new Vector2(title.Position.X, 450), Resources.MenuItemScale);
+            menuItems.Add("Exit", new Vector2(title.Position.X, 515), Resources.MenuItemScale);
             this.Children.Add(menuItems);
 
             // PulseEffect: TextBlock, MinimumLoss, MaximumLoss, ChangeRate, DifferenceInChange.
             menuItems.Options.SelectedEffect = 
-                new TextEffectPulse(menuItems.Items[0], 0.01f, 0.4f, 0.0008f, TimeSpan.FromSeconds(0.4));
+                new TextEffectPulse(menuItems.Items[0], 0.01f, 0.2f, 0.0002f, TimeSpan.FromSeconds(0.4));
 
             // Add some asteroids.
             for (int i = 0; i < 50; i++)

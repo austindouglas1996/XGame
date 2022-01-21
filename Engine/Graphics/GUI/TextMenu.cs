@@ -70,11 +70,12 @@ namespace XGameEngine.Graphics.GUI
         /// <param name="text"></param>
         /// <param name="position"></param>
         /// <param name="click"></param>
-        public void Add(string text, Vector2 position, EventHandler click = null)
+        public void Add(string text, Vector2 position, float scale, EventHandler click = null)
         {
             TextBlock tb = new TextBlock(this.Game, text, position);
             tb.Parent = this;
             tb.Foreground = Options.Foreground;
+            tb.Scale = scale;
             tb.Click += click;
 
             this.Items.Add(tb);
