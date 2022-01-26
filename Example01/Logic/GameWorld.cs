@@ -21,7 +21,12 @@ namespace Example01
         public GameWorld(XGame game) 
             : base(game, Vector2.Zero)
         {
+            WorldWidth = 2000;
+            WorldHeight = 2000;
         }
+
+        public int WorldWidth { get; set; }
+        public int WorldHeight { get; set; }
 
         /// <summary>
         /// Handls rendering the background stars.
@@ -69,6 +74,15 @@ namespace Example01
         }
 
         /// <summary>
+        /// Add a ship part to the world.
+        /// </summary>
+        /// <param name="part"></param>
+        public void AddShipPart(ShipPart part)
+        {
+            this.Children.Add(part);
+        }
+
+        /// <summary>
         /// Add a UFO to the world.
         /// </summary>
         /// <param name="ship"></param>
@@ -102,6 +116,16 @@ namespace Example01
             AddMeteor(m);
         }
 
+        public void AddShipPartRandom()
+        {
+            int Max = Resources.ShipPartsTextures.Count;
+            Texture2D resource = Resources.ShipPartsTextures[RandomNum.Next(0, Max)].Resource;
+
+            ShipPart part = new ShipPart(this.Game, resource, RandomPositionOutsideBounds(), Color.White);
+
+            AddShipPart(part);
+        }
+
         /// <summary>
         /// Remove only the players, but keep the asteroids.
         /// </summary>
@@ -128,11 +152,11 @@ namespace Example01
             Random rand = new Random();
             this.Primitive = new PrimitiveBatch(base.Game.GraphicsDevice);
 
-            for (int i = 0; i < 700; i++)
+            for (int i = 0; i < 1500; i++)
             {
                 // Width and height of the game.
-                int width = Game.View.Width;
-                int height = Game.View.Height;
+                int width = WorldWidth;
+                int height = WorldHeight;
 
                 // Size of the stars.
                 int size = rand.Next(1, 2);
@@ -278,13 +302,13 @@ namespace Example01
             {
                 // Choose random Y.
                 minY = -100;
-                maxY = this.Game.View.Height;
+                maxY = WorldHeight;
             }
             else
             {
                 // Choose random X.
                 minX = 0;
-                minX = this.Game.View.Width;
+                minX = WorldWidth;
             }
 
             x = RandomNum.GetRandomFloat(minX, maxX);
@@ -305,16 +329,16 @@ namespace Example01
             float difference = 25.0f;
 
             // Bounds of the object.
-            float x = this.Game.Camera.Position.X + child.Position.X;
-            float y = this.Game.Camera.Position.Y + child.Position.Y;
+            float x = child.Position.X;
+            float y = child.Position.Y;
 
             // Holds the Min/Max values for X.
-            float minX = this.Game.Camera.Position.X - child.ActualWidth - difference;
-            float maxX = this.Game.Camera.Position.X + this.Game.View.Width + child.ActualWidth + difference;
+            float minX = child.ActualWidth - difference;
+            float maxX = WorldWidth + child.ActualWidth + difference;
 
             // Holds the Min/Max values for Y.
-            float minY = this.Game.Camera.Position.Y - child.ActualHeight - difference;
-            float maxY = this.Game.Camera.Position.Y + this.Game.View.Height + child.ActualHeight + difference;
+            float minY = child.ActualHeight - difference;
+            float maxY = WorldHeight + child.ActualHeight + difference;
 
             if (x < minX)
                 x = maxX;

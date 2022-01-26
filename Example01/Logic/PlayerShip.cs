@@ -64,6 +64,8 @@ namespace Example01.Logic
                 }
             }
 
+            this.Game.Camera.Position = this.Position - new Vector2(800,800);
+
             base.Update(gameTime);
         }
 

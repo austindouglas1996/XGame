@@ -81,6 +81,13 @@ namespace Example01.Screens
                 for (int i = 0; i < 100; i++)
                     Game1.World.AddMeteorRandom();
             }
+
+            // P stands for part.
+            if (InputState.KeyPressed(Keys.P, PlayerIndex.One, StateOptions.CurrentFavor))
+            {
+                for (int i = 0; i < 100; i++)
+                    Game1.World.AddShipPartRandom();
+            }
         }
         public override void Draw(SpriteBatch sprite, GameTime gameTime)
         {
@@ -121,8 +128,8 @@ namespace Example01.Screens
 
             // Adjust player position.
             StartPos = new Vector2(
-                ((this.Game.View.Width - Player.ActualWidth) / 2) + 50,
-                (this.Game.View.Height - Player.ActualHeight) / 2);
+                ((Game1.World.WorldWidth - Player.ActualWidth) / 2) + 50,
+                (Game1.World.WorldHeight - Player.ActualHeight) / 2);
 
             // Set player position.
             Player.Position = StartPos;

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using XGameEngine.Logic.Camera;
 
 namespace XGameEngine.Graphics
 {
@@ -81,6 +82,7 @@ namespace XGameEngine.Graphics
             // Initialize effect.
             this.basicEffect = new BasicEffect(this.device);
             this.basicEffect.VertexColorEnabled = true;
+            
 
             // Set projection as a orthographic.
             this.basicEffect.Projection = Matrix.CreateOrthographicOffCenter
@@ -154,6 +156,7 @@ namespace XGameEngine.Graphics
 
             // Begin basicEffect.
             this.basicEffect.CurrentTechnique.Passes[0].Apply();
+
 
             // We have begun. User can not call 'AddVertex', 'Flush', and 'End'.
             this.hasBegun = true;

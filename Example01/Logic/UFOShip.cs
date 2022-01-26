@@ -19,8 +19,8 @@ namespace Example01.Logic
     public class UFOShip : ShipGameObject
     {        
         // Min/Max of the rotation speed of the UFO.
-        private static float MinRotationSpeed = 0.004f;
-        private static float MaxRotationSpeed = 0.007f;
+        private static float MinRotationSpeed = 0.024f;
+        private static float MaxRotationSpeed = 0.027f;
 
         /// <summary>
         /// Current rotation speed of the UFO.
@@ -78,9 +78,6 @@ namespace Example01.Logic
         }
         private UFOResource _Resource;
 
-        TextBlock b = null;
-        double g = 0;
-
         /// <summary>
         /// Update the UFO position.
         /// </summary>
@@ -97,53 +94,13 @@ namespace Example01.Logic
                     break;
             }
 
-            //this.Rotation += RotationSpeed;
-
-            if (b != null)
-            {
-                PlayerShip p = Game1.World.Player;
-
-
-                Vector2 direction = p.Position - this.Position;
-                direction.Normalize();
-                float rotationInRadians = (float)Math.Atan2((double)direction.Y,
-                                             (double)direction.X) + MathHelper.PiOver2;
-
-                MouseState mouseState = Mouse.GetState();
-                double f = Math.Atan2((double)mouseState.Y - this.Position.Y, (double)mouseState.X - this.Position.X);
-                g = f;
-
-                float xDiff = p.Position.X - this.Position.X;
-                float yDiff = p.Position.Y - this.Position.Y;
-
-
-                //float xDiff = this.Position.X - p.Position.X;
-                //float yDiff = this.Position.Y - p.Position.Y;
-                double r = Math.Atan2(yDiff, xDiff);
-                //g = (r * (180/Math.PI));
-
-                b.Text = f.ToString();
-
-                if (InputState.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Q, PlayerIndex.One, StateOptions.CurrentFavor))
-                {
-                    ShipProjectile proj = new ShipProjectile
-                        (this.Game, this, this.Resource.Projectile, this.Position, this.Velocity, Color.White); 
-                    proj.Initialize();
-                    proj.Rotation = (float)g;
-
-
-                    Game1.World.AddProjectile(proj);
-                }
-            }
-
+            this.Rotation += this.RotationSpeed;
 
             base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch sprite, GameTime gameTime)
         {
-            sprite.Draw(base.Game.EngineResource.Dummy, new Rectangle((int)
-                this.Position.X, (int)this.Position.Y, 10, 500), null, Color.White, (float)g, new Vector2(1,1), SpriteEffects.None, 1f);
             base.Draw(sprite, gameTime);
         }
 
@@ -152,9 +109,6 @@ namespace Example01.Logic
         /// </summary>
         public override void Initialize()
         {
-            b = new TextBlock(this.Game, "", new Vector2(100, 100));
-            this.Children.Add(b);
-
             // Choose random directions for X and Y.
             // Left side of the screen or right
             // Top of the screen or the bottom.
@@ -191,8 +145,7 @@ namespace Example01.Logic
 
             // Get a random rotation speed. Then make sure it's correct.
             RotationSpeed = RandomNum.GetRandomFloat(MinRotationSpeed, MaxRotationSpeed);
-            if (RotationSpeed < MinRotationSpeed) RotationSpeed = MinRotationSpeed;
-            if (RotationSpeed > MaxRotationSpeed) RotationSpeed = MaxRotationSpeed;
+            RotationSpeed = Math.Clamp(RotationSpeed, MinRotationSpeed, MaxRotationSpeed);
 
             base.Initialize();
         }

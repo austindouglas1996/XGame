@@ -23,7 +23,7 @@ namespace Example01.Screens
         public override void Initialize()
         {
             // Create the title block. Middle of the screen.
-            TextBlock title = new TextBlock(base.Game, "Asteroids 2D", Vector2.Zero);
+            TextBlock title = new TextBlock(base.Game, "2D Asteroids", Vector2.Zero);
             title.Font = Resources.TitleFont;
             title.Foreground = Color.White;
             title.Scale = Resources.TitleScale;

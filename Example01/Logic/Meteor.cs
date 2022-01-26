@@ -170,10 +170,7 @@ namespace Example01.Logic
         {
             // Set the rotation speed and then make sure it does not go past our limit.
             this.RotationSpeed = RandomNum.GetRandomFloat(RotationSpeedMin, RotationSpeedMax);
-            if (this.RotationSpeed > RotationSpeedMax)
-                RotationSpeed = RotationSpeedMax;
-            else if (this.RotationSpeed < RotationSpeedMin)
-                RotationSpeed = RotationSpeedMin;
+            this.RotationSpeed = Math.Clamp(this.RotationSpeed, RotationSpeedMin, RotationSpeedMax);
 
             // Set random velocity speed.
             this.Velocity = new Vector2(

@@ -32,31 +32,6 @@ namespace XGameEngine
         private FPSCounter frameCounter;
 
         /// <summary>
-        /// Holds the camera which can be used to edit the rendering portion.
-        /// </summary>
-        private GameCamera camera;
-
-        /// <summary>
-        /// Helps render game content.
-        /// </summary>
-        private IGameRenderer render;
-
-        /// <summary>
-        /// Reads or writes the game settings.
-        /// </summary>
-        private GameSettings settings;
-
-        /// <summary>
-        /// Represents the view of the game.
-        /// </summary>
-        private GameView view;
-
-        /// <summary>
-        /// Helps get files within the engines assembly.
-        /// </summary>
-        private ResourceLoader engineResource;
-
-        /// <summary>
         /// Manages the active game screen.
         /// </summary>
         private ScreenManager screens;
@@ -125,6 +100,7 @@ namespace XGameEngine
             get { return this.camera; }
             set { this.camera = value; }
         }
+        private GameCamera camera;
 
         /// <summary>
         /// Helps with rendering game sprites.
@@ -133,6 +109,7 @@ namespace XGameEngine
         {
             get { return this.render; }
         }
+        private IGameRenderer render;
 
         /// <summary>
         /// Gets the primary game settings.
@@ -141,6 +118,7 @@ namespace XGameEngine
         {
             get { return this.settings; }
         }
+        private GameSettings settings;
 
         /// <summary>
         /// Gets the rendering portion of the game.
@@ -149,6 +127,7 @@ namespace XGameEngine
         {
             get { return this.view; }
         }
+        private GameView view;
 
         /// <summary>
         /// Gets the engines content within the assembly.
@@ -157,6 +136,7 @@ namespace XGameEngine
         {
             get { return this.engineResource; }
         }
+        private ResourceLoader engineResource;
 
         /// <summary>
         /// Gets the manager for the game screens.

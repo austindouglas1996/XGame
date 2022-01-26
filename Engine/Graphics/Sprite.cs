@@ -103,7 +103,7 @@ namespace XGameEngine.Graphics
         /// <summary>
         /// Gets or sets the sprite drawing depth.
         /// </summary>
-        public float Depth
+        public virtual float Depth
         {
             get { return this.depth; }
             set { this.depth = value; }
@@ -112,7 +112,7 @@ namespace XGameEngine.Graphics
         /// <summary>
         /// Gets or sets the sprite rotation.
         /// </summary>
-        public float Rotation
+        public virtual float Rotation
         {
             get { return this.rotation; }
             set { this.rotation = value; }
@@ -121,7 +121,7 @@ namespace XGameEngine.Graphics
         /// <summary>
         /// Gets or sets the sprite drawing size.
         /// </summary>
-        public float Scale
+        public virtual float Scale
         {
             get { return this.scale; }
             set { this.scale = value; }

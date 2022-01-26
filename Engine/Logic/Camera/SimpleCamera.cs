@@ -28,11 +28,11 @@ namespace XGameEngine.Logic.Camera
         /// <returns>Matrix</returns>
         public override Matrix GetTransformation()
         {
-            return Matrix.CreateTranslation(new Vector3(-this.Position.X, this.Position.Y, 0))
+            return Matrix.CreateTranslation(new Vector3(-this.Position.X, -this.Position.Y, 0))
                 * Matrix.CreateTranslation(new Vector3(-Origin, 0.0f))
                 * Matrix.CreateRotationZ(Rotation)
-                * Matrix.CreateScale(this.Zoom)
-                * Matrix.CreateTranslation(new Vector3(Origin, 0.0f));
+                * Matrix.CreateScale(new Vector3(this.Zoom, this.Zoom, 1f))
+                * Matrix.CreateTranslation(new Vector3(this.Width * 0.5f, this.Height * 0.5f, 0));
         }
     }
 }

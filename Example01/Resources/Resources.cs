@@ -32,6 +32,7 @@ namespace Example01
         public static List<ResourceInfo<Texture2D>> ShipIconTextures = new List<ResourceInfo<Texture2D>>();
         public static List<ResourceInfo<Texture2D>> ProjectileTextures = new List<ResourceInfo<Texture2D>>();
         public static List<ResourceInfo<Texture2D>> UFOTextures = new List<ResourceInfo<Texture2D>>();
+        public static List<ResourceInfo<Texture2D>> ShipPartsTextures = new List<ResourceInfo<Texture2D>>();
         public static List<ResourceInfo<Texture2D>> MeteorTextures = new List<ResourceInfo<Texture2D>>();
         public static List<ResourceInfo<Texture2D>> NumberTextures = new List<ResourceInfo<Texture2D>>();
 
@@ -56,6 +57,7 @@ namespace Example01
             MeteorTextures = LoadTextures(resource, ExeDir + @"\Content\Textures\Meteors\", "Meteors");
             UFOTextures = LoadTextures(resource, ExeDir + @"\Content\Textures\Ships\UFO\", "UFOShip");
             NumberTextures = LoadTextures(resource, ExeDir + @"\Content\Textures\UI\Numbers\", "Numbers");
+            ShipPartsTextures = LoadTextures(resource, ExeDir + @"\Content\Textures\ShipParts\", "ShipParts");
 
             // Load projectile sound.
             ProjectileSounds.Add(resource.Load<Song>(@"sfx_laser1"));

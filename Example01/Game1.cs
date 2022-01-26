@@ -36,10 +36,6 @@ namespace Example01
 
         protected override void Initialize()
         {
-            World = new GameWorld(this);
-            World.Initialize();
-            base.Render.Entities.Add(World);
-
             base.Initialize();
         }
 
@@ -49,7 +45,18 @@ namespace Example01
 
             Resources.LoadContent(base.EngineResource);
 
+
+            World = new GameWorld(this);
+            World.Initialize();
+            base.Render.Entities.Add(World);
+
             this.Screens.Push(new MainMenu(this));
+
+
+
+            base.LoadContent();
+
+            //this.Camera.Zoom = 0.8f;
         }
 
         protected override void Update(GameTime gameTime)
