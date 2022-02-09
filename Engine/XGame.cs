@@ -42,11 +42,6 @@ namespace XGameEngine
         private ScreenShot screenShot;
 
         /// <summary>
-        /// Name of the current game.
-        /// </summary>
-        private string name = string.Empty;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XGame"/> class.
         /// </summary>
         /// <param name="width">Width of the game.</param>
@@ -54,26 +49,7 @@ namespace XGameEngine
         /// <param name="name">Name of the game window.</param>
         public XGame(int width, int height, string name)
         {
-            // Set the name of the game.
-            this.name = name;
-
-            // Initialize settings.
-            this.settings = new GameSettings(this);
-            this.settings.Load();
-
-            // Initialize view.
-            this.view = new GameView(this, new Vector2(width, height));
-            this.settings.Display.Width = width;
-            this.settings.Display.Height = height;
-
-            // Initialize render.
-            this.render = new GameRenderDefault(this);
-
-            // Initialize engine resources.
-            this.engineResource = new ResourceLoader(this, this.contentPath);
-            this.engineResource.Initialize();
-
-            WriteVersionToFile();
+            graphics = new GraphicsDeviceManager(this);
         }
 
         /// <summary>
@@ -93,6 +69,19 @@ namespace XGameEngine
         }
 
         /// <summary>
+        /// Gets the configuration and management for the graphicsDevice.
+        /// </summary>
+        public GraphicsDeviceManager Graphics
+        {
+            get
+            {
+                return this.graphics;
+            }
+        }
+        private GraphicsDeviceManager graphics;
+
+
+        /// <summary>
         /// Gets or sets the camera used when rendering the game.
         /// </summary>
         public GameCamera Camera
@@ -105,29 +94,20 @@ namespace XGameEngine
         /// <summary>
         /// Helps with rendering game sprites.
         /// </summary>
-        public IGameRenderer Render
+        public IGameRenderer WorldRender
         {
-            get { return this.render; }
+            get { return this.worldrender; }
         }
-        private IGameRenderer render;
+        private IGameRenderer worldrender;
 
         /// <summary>
-        /// Gets the primary game settings.
+        /// Helps with rendering UI elements.
         /// </summary>
-        public GameSettings Settings
+        public IGameRenderer UIRender
         {
-            get { return this.settings; }
+            get { return this.uirender; }
         }
-        private GameSettings settings;
-
-        /// <summary>
-        /// Gets the rendering portion of the game.
-        /// </summary>
-        public GameView View
-        {
-            get { return this.view; }
-        }
-        private GameView view;
+        private IGameRenderer uirender;
 
         /// <summary>
         /// Gets the engines content within the assembly.
@@ -153,14 +133,6 @@ namespace XGameEngine
                     (Assembly.GetExecutingAssembly().Location);
 
         /// <summary>
-        /// Gets the name of the current game.
-        /// </summary>
-        public string Name
-        {
-            get { return this.name; }
-        }
-
-        /// <summary>
         /// Draw the game.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
@@ -169,9 +141,13 @@ namespace XGameEngine
             // Update the frame count.
             this.frameCounter.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
-            this.render.Begin();
-            this.render.Draw(gameTime);
-            this.render.End();
+            this.uirender.Begin();
+            this.uirender.Draw(gameTime);
+            this.uirender.End();
+
+            this.worldrender.Begin();
+            this.worldrender.Draw(gameTime);
+            this.worldrender.End();
 
             base.Draw(gameTime);
         }
@@ -181,30 +157,46 @@ namespace XGameEngine
         /// </summary>
         protected override void Initialize()
         {
+            graphics.PreferredBackBufferWidth = 1200;
+            graphics.PreferredBackBufferHeight = 1000;
+            graphics.ApplyChanges();
+
             // Initialize render.
-            this.render.Initialize();
+            this.uirender = new GameRenderDefault(this);
+            this.worldrender = new GameRenderDefault(this);
+
+            // Initialize render.
+            this.uirender.Initialize();
+            this.worldrender.Initialize();
 
             // Initialize the screens.
             this.screens = new ScreenManager(this);
             this.screens.Initialize();
-            this.render.Entities.Add(this.screens);
+            this.worldrender.Entities.Add(this.screens);
 
             // Setup the screenshot.
             this.screenShot = new ScreenShot
-                (this, new Action(delegate{this.Draw(new GameTime());}), 
+                (this, new Action(delegate { this.Draw(new GameTime()); }),
                 string.Format("{0}/{1}/ScreenShots", ExecutionPath, contentPath));
 
             // Initialize frameCounter
             this.frameCounter = new FPSCounter();
 
-            // Create a basic camera.
-            this.camera = new SimpleCamera(this.view.Viewport);
-            this.render.SpriteOptions.Camera = this.camera;
-
-            // Apply graphics.
-            this.view.ApplyChanges();
-
             base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {            
+            // Initialize engine resources.
+            this.engineResource = new ResourceLoader(this, this.contentPath);
+            this.engineResource.Initialize();
+
+            base.LoadContent();
+
+            // Create a basic camera.
+            this.camera = new SimpleCamera(this.GraphicsDevice.Viewport);
+            this.worldrender.SpriteOptions.Camera = this.camera;
+
         }
 
         /// <summary>
@@ -215,7 +207,7 @@ namespace XGameEngine
         {
             // Update the input of the game.
             InputState.Update(gameTime);
-            this.render.Update(gameTime);
+            this.worldrender.Update(gameTime);
 
 
             if (InputState.KeyPressed(Keys.F12, PlayerIndex.One, StateOptions.CurrentFavor))
@@ -224,33 +216,6 @@ namespace XGameEngine
             }
 
             base.Update(gameTime);
-        }
-
-        /// <summary>
-        /// Writes the current version to file.
-        /// </summary>
-        private static void WriteVersionToFile()
-        {
-            string path = Assembly.GetExecutingAssembly().Location;
-            string savePath = Path.GetDirectoryName(path) + "\\Content\\Version";
-
-            // Get info on the current assembly.
-            FileVersionInfo versionInfo = 
-                FileVersionInfo.GetVersionInfo(path);
-
-            // Get version.
-            string? version = versionInfo.FileVersion;
-
-            // Write to file if file does not exist already.
-            if (!File.Exists(savePath))
-            {
-                using (StreamWriter stream = new StreamWriter(savePath))
-                {
-                    stream.WriteLine
-                        (string.Format("{0} Version: {1}", Path.GetFileName(versionInfo.FileName), version));
-                }
-            }
-
         }
     }
 }

@@ -42,13 +42,13 @@ namespace Example01.Screens
             // Setup the player lives display.
             LivesDisplay = new PlayerLivesDisplay(this);
             LivesDisplay.Initialize();
-            LivesDisplay.Position = new Vector2(50, base.Game.View.Height - LivesDisplay.ActualHeight - 50);
+            LivesDisplay.Position = new Vector2(50, Game.GraphicsDevice.Viewport.Height - LivesDisplay.ActualHeight - 50);
             this.Children.Add(LivesDisplay);
 
             // Setup the player scores display.
             ScoreDisplay = new PlayerScoreDisplay(this);
             ScoreDisplay.Initialize();
-            ScoreDisplay.Position = new Vector2((this.Game.View.Width - ScoreDisplay.ActualWidth) / 2, 50);
+            ScoreDisplay.Position = new Vector2((Game.GraphicsDevice.Viewport.Width - ScoreDisplay.ActualWidth) / 2, 50);
             this.Children.Add(ScoreDisplay);
 
             // Reset the scene.

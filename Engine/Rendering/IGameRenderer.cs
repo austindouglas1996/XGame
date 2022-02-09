@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XGameEngine;
-using XGameEngine.Common;
 using XGameEngine.Graphics;
 
 namespace XGameEngine.Rendering

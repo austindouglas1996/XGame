@@ -20,10 +20,9 @@ namespace XGameEngine.Settings
         {
             this.PreferFullScreen = false;
             this.PreferMultiSampling = true;
-            this.Height = height;
+            this.WindowHeight = height;
             this.MultiSampleCount = 16;
-            this.Width = width;
-            //this.SamplerState = SamplerState.AnisotropicClamp;
+            this.WindowWidth = width;
         }
 
         public DisplayOptions()
@@ -44,7 +43,7 @@ namespace XGameEngine.Settings
         /// <summary>
         /// Height of the window.
         /// </summary>
-        public int Height { get; set; }
+        public int WindowHeight { get; set; }
 
         /// <summary>
         /// Number of passes through the antilias filter.
@@ -54,11 +53,6 @@ namespace XGameEngine.Settings
         /// <summary>
         /// Width of the window.
         /// </summary>
-        public int Width { get; set; }
-
-        /// <summary>
-        /// Determines textures filter and details.
-        /// </summary>
-        //public SamplerState SamplerState { get; set; }
+        public int WindowWidth { get; set; }
     }
 }

@@ -42,8 +42,6 @@ namespace XGameEngine
             // Initialize.
             this.graphics = new GraphicsDeviceManager(game);
 
-            // Setup options.
-            this.options = game.Settings.Display;
         }
 
         /// <summary>
@@ -54,6 +52,7 @@ namespace XGameEngine
         public GameView(XGame game, Vector2 bounds)
             : this(game)
         {
+            this.options = new DisplayOptions();
             this.Width = (int)bounds.X;
             this.Height = (int)bounds.Y;
             this.ApplyChanges();
@@ -95,8 +94,8 @@ namespace XGameEngine
         /// </summary>
         public int Height
         {
-            get { return this.options.Height; }
-            set { this.options.Height = value; }
+            get { return this.options.WindowHeight; }
+            set { this.options.WindowHeight = value; }
         }
 
         /// <summary>
@@ -104,8 +103,8 @@ namespace XGameEngine
         /// </summary>
         public int Width
         {
-            get { return this.options.Width; }
-            set { this.options.Width = value; }
+            get { return this.options.WindowWidth; }
+            set { this.options.WindowWidth = value; }
         }
 
         /// <summary>
@@ -124,14 +123,13 @@ namespace XGameEngine
         {
             // Set the options.
             this.Graphics.IsFullScreen = this.options.PreferFullScreen;
-            this.Graphics.PreferredBackBufferHeight = this.options.Height;
-            this.Graphics.PreferredBackBufferWidth = this.options.Width;
+            this.Graphics.PreferredBackBufferHeight = this.options.WindowHeight;
+            this.Graphics.PreferredBackBufferWidth = this.options.WindowWidth;
             this.Graphics.PreferMultiSampling = this.options.PreferMultiSampling;
 
             // Make sure the game has been initialized.
-            if (this.game.GraphicsDevice != null)
+            if (this.GraphicsDevice != null)
             {
-                //this.GraphicsDevice.SamplerStates[0] = this.options.SamplerState;
                 this.GraphicsDevice.PresentationParameters.MultiSampleCount = this.options.MultiSampleCount;
             }
 

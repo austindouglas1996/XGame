@@ -285,7 +285,7 @@ namespace Example01
                     maxX = 100;
                     break;
                 case Direction.Right:
-                    minX = this.Game.View.Width;
+                    minX = this.WorldWidth;
                     maxX = minX + 100;
                     break;
                 case Direction.Top:
@@ -293,7 +293,7 @@ namespace Example01
                     maxY = 0;
                     break;
                 case Direction.Bottom:
-                    minY = this.Game.View.Height;
+                    minY = this.WorldHeight;
                     maxY = minY + 100;
                     break;
             }

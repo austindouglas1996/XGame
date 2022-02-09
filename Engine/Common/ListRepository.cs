@@ -7,9 +7,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using XGameEngine;
-using XGameEngine.Common;
 
-namespace XGameEngine.Common
+namespace XGameEngine
 {
     public class ListRepository<TEntity> : IRepository<TEntity>
         where TEntity : GameObject

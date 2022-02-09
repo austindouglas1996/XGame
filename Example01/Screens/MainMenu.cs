@@ -27,7 +27,7 @@ namespace Example01.Screens
             title.Font = Resources.TitleFont;
             title.Foreground = Color.White;
             title.Scale = Resources.TitleScale;
-            title.Position = new Vector2((base.Game.View.Width - title.ActualWidth) / 2, 150); 
+            title.Position = new Vector2((Game.GraphicsDevice.Viewport.Width - title.ActualWidth) / 2, 150); 
             title.Background = new Color(0, 0, 0, 100);
             this.Children.Add(title);
 

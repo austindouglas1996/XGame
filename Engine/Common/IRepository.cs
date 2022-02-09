@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XGameEngine;
 
-namespace XGameEngine.Common
+namespace XGameEngine
 {
     public interface IRepository<TEntity> where TEntity : class, IGameObject
     {

@@ -122,7 +122,7 @@ namespace Example01.Logic
             switch (ChosenDirectionX)
             {
                 case Direction.Right:
-                    x = this.Game.View.Width + this.Texture.Width;
+                    x = Game1.World.WorldWidth + this.Texture.Width;
                     break;
                 case Direction.Left:
                     x = -this.Texture.Width;
@@ -136,7 +136,7 @@ namespace Example01.Logic
                     y = this.Texture.Height + 50;
                     break;
                 case Direction.Bottom:
-                    y = this.Game.View.Height - this.Texture.Height - 50;
+                    y = Game1.World.WorldHeight - this.Texture.Height - 50;
                     break;
             }
 

@@ -28,7 +28,7 @@ namespace Example01
 
 
         public Game1()
-            : base(1200,1000,"Testing")
+            : base(2200,1000,"Testing")
         {
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -41,6 +41,8 @@ namespace Example01
 
         protected override void LoadContent()
         {
+            base.LoadContent();
+
             _font = base.EngineResource.Load<SpriteFont>("defaultfont");
 
             Resources.LoadContent(base.EngineResource);
@@ -48,15 +50,9 @@ namespace Example01
 
             World = new GameWorld(this);
             World.Initialize();
-            base.Render.Entities.Add(World);
+            base.WorldRender.Entities.Add(World);
 
             this.Screens.Push(new MainMenu(this));
-
-
-
-            base.LoadContent();
-
-            //this.Camera.Zoom = 0.8f;
         }
 
         protected override void Update(GameTime gameTime)

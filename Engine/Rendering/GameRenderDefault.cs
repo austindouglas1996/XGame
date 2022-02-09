@@ -68,7 +68,7 @@ namespace XGameEngine.Rendering
         public override void Initialize()
         {
             // Initialize sprite.
-            this.SpriteBatch = new SpriteBatch(this.Game.View.GraphicsDevice);
+            this.SpriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
 
             // Create options.
             this.SpriteOptions = new SpriteBatchRenderOptions

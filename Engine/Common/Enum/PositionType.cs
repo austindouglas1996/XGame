@@ -2,22 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace XGameEngine
 {
-    /// <summary>
-    /// Specifies the position types.
-    /// </summary>
     public enum PositionType
     {
         /// <summary>
-        /// Position is not relative to the parent.
+        /// If this element is a child, it's position will be drawn relative to the parent.
+        /// This means that child will be drawn like:
+        /// 
+        /// ParentA.Position = 100,100
+        /// ChildA.Position = 50,50
+        /// 
+        /// ChildA will be rendered at 150,150
         /// </summary>
-        Absolute,
+        Relative,
 
         /// <summary>
-        /// Position is relative to the parent.
+        /// If this element is a child, it's position will be drawn absolute to the parent.
+        /// This means that child will be drawn like:
+        /// 
+        /// ParentA.Position = 100,100
+        /// ChildA.Position = 50,50
+        /// 
+        /// ChildA will be rendered at 50,50
         /// </summary>
-        Relative
+        Absolute
     }
 }

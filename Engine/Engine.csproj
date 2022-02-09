@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="GameView.cs" />
+    <Compile Remove="Managers\GameSettings.cs" />
+    <Compile Remove="Settings\ISettings.cs" />
+    <Compile Remove="Settings\Settings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
   </ItemGroup>
 

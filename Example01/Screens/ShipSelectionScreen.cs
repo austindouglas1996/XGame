@@ -94,7 +94,7 @@ namespace Example01.Screens
             TextBlock title = new TextBlock(base.Game, "SELECT YOUR SHIP!", Vector2.Zero);
             title.Scale = Resources.TitleScale;
             title.Foreground = Color.White;
-            title.Position = new Vector2((base.Game.View.Width - title.ActualWidth) / 2, 250);
+            title.Position = new Vector2((Game.GraphicsDevice.Viewport.Width - title.ActualWidth) / 2, 250);
             title.Background = new Color(0, 0, 0, 100);
             this.Children.Add(title);
 
@@ -111,12 +111,12 @@ namespace Example01.Screens
             TextMenu menu = new TextMenu(this.Game);
             menu.Options = options;
             menu.Add("PLAY!", 
-                new Vector2(base.Game.View.Width - menu.ActualWidth - 200, base.Game.View.Height - menu.ActualHeight - 150),
+                new Vector2(Game.GraphicsDevice.Viewport.Width - menu.ActualWidth - 200, Game.GraphicsDevice.Viewport.Height - menu.ActualHeight - 150),
                 Resources.MenuItemScale,
                 this.PlayClick);
 
             menu.Add("BACK",
-                new Vector2(base.Game.View.Width - menu.ActualWidth - 400, base.Game.View.Height - menu.ActualHeight - 150),
+                new Vector2(Game.GraphicsDevice.Viewport.Width - menu.ActualWidth - 400, Game.GraphicsDevice.Viewport.Height - menu.ActualHeight - 150),
                 Resources.MenuItemScale,
                 this.BackClick);
 

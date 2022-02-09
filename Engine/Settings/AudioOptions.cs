@@ -8,7 +8,7 @@ namespace XGameEngine.Settings
     /// <summary>
     /// Provides basic options for audio settings.
     /// </summary>
-    public struct AudioOptions
+    public class AudioOptions
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AudioOptions"/> struct.
@@ -16,11 +16,15 @@ namespace XGameEngine.Settings
         /// <param name="effectsVolume">Effects volume.</param>
         /// <param name="musicVolume">Music volume.</param>
         public AudioOptions(float effectsVolume = 1.0f, float musicVolume = 1.0f)
-            : this()
         {
             this.EffectsVolume = effectsVolume;
             this.MusicVolume = musicVolume;
             this.MasterVolume = 1.0f;
+        }
+
+        public AudioOptions()
+        {
+
         }
 
         /// <summary>

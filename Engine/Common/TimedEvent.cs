@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace XGameEngine.Common
+namespace XGameEngine
 {
     /// <summary>
     /// Executes an event after a certain amount of time has passed.

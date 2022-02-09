@@ -22,8 +22,8 @@ namespace Example01.Screens
         {
             Container c = new Container(this.Game);
             c.Background = new Color(0, 0, 0, 100);
-            c.Width = Game.View.Width;
-            c.Height = Game.View.Height;
+            c.Width = Game.GraphicsDevice.Viewport.Width;
+            c.Height = Game.GraphicsDevice.Viewport.Height;
             c.Position = new Vector2(0, 0);
             this.Children.Add(c);
 
@@ -31,7 +31,7 @@ namespace Example01.Screens
             TextBlock title = new TextBlock(base.Game, "GAME OVER", Vector2.Zero);
             title.Foreground = Color.White;
             title.Scale = 2.0f;
-            title.Position = new Vector2((base.Game.View.Width - title.ActualWidth) / 2, 150);
+            title.Position = new Vector2((Game.GraphicsDevice.Viewport.Width - title.ActualWidth) / 2, 150);
             this.Children.Add(title);
 
             base.Initialize();

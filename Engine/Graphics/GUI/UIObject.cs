@@ -221,7 +221,7 @@ namespace XGameEngine.Graphics.GUI
                 return;
             }
 
-            base.Game.Render.SpriteBatch.Draw
+            base.Game.WorldRender.SpriteBatch.Draw
                 (base.Game.EngineResource.Dummy, this.Bounds, null, this.background,
                 this.rotation, new Vector2(0, 0), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, this.depth);
 

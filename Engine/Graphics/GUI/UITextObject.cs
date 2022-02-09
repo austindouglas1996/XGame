@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using XGameEngine.Common;
 using XGameEngine.Core;
 
 namespace XGameEngine.Graphics.GUI
@@ -104,7 +103,7 @@ namespace XGameEngine.Graphics.GUI
             {
                 Vector2 origin = new Vector2(this.ActualWidth / 2, this.ActualHeight / 2);
 
-                base.Game.Render.SpriteBatch.DrawString
+                base.Game.WorldRender.SpriteBatch.DrawString
                     (this.font, this.text, this.ScreenPosition, this.foreground, this.Rotation,
                     new Vector2(-3,0), this.Scale, SpriteEffects.None, 1f);
 

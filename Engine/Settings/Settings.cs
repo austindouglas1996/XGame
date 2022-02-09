@@ -9,19 +9,18 @@ namespace XGameEngine.Settings
     /// <summary>
     /// Provides the game settings.
     /// </summary>
-    public struct SettingsBase : ISettings
+    public struct SettingsBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Settings"/> struct.
         /// </summary>
-        public SettingsBase(AudioOptions audio = new AudioOptions(), 
-            DisplayOptions display = null)
+        public SettingsBase(AudioOptions audio = new AudioOptions(), DisplayOptions display = null)
             : this()
         {
             this.Audio = audio;
 
             if (display == null)
-                display = new DisplayOptions();
+                display = new DisplayOptions(800,400);
 
             this.Display = display;
         }

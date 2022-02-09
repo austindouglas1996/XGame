@@ -223,7 +223,7 @@ namespace XGameEngine.Graphics
                 return;
             }
 
-            base.Game.Render.SpriteBatch.Draw
+            base.Game.WorldRender.SpriteBatch.Draw
                 (this.texture, this.ScreenPosition, null, this.color,
                 this.rotation, this.Center, this.scale, this.effects, this.depth);
 

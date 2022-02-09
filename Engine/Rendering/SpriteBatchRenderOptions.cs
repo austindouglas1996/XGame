@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using XGameEngine.Logic.Camera;
 
-namespace XGameEngine
+namespace XGameEngine.Rendering
 {
     /// <summary>
     /// Provides options for SpriteBatch rendering.

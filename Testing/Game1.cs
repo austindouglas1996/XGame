@@ -3,15 +3,17 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.IO;
+using XGameEngine;
 
 namespace Testing
 {
-    public class Game1 : Game
+    public class Game1 : XGame
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
         public Game1()
+            : base(800,400,"game1")
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -32,6 +34,7 @@ namespace Testing
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            /*
             Texture2D arrowTexture = Texture2D.FromStream(GraphicsDevice, new FileStream("Content/2.png", FileMode.Open));
             _arrow = new Sprite(arrowTexture)
             {
@@ -52,7 +55,7 @@ namespace Testing
                 Effect = SpriteEffects.None,
                 Origin = new Vector2(arrowTexture.Bounds.Center.X, arrowTexture.Bounds.Center.Y)
             };
-
+            */
             // TODO: use this.Content to load your game content here
         }
 
