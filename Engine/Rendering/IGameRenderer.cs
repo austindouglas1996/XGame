@@ -28,28 +28,28 @@ namespace XGameEngine.Rendering
         /// <summary>
         /// SpriteBatch to render game objects.
         /// </summary>
-        SpriteBatch SpriteBatch { get; set; }
+        List<SpriteBatch> SpriteBatch { get; set; }
 
         /// <summary>
         /// Options for rendering sprites.
         /// </summary>
-        SpriteBatchRenderOptions SpriteOptions { get; set; }
+        List<SpriteBatchRenderOptions> SpriteOptions { get; set; }
 
         /// <summary>
         /// Start batch operations.
         /// </summary>
-        void Begin();
+        void Begin(int layer);
 
         /// <summary>
         /// End the current batch operations.
         /// </summary>
-        void End();  
+        void End(int layer);  
         
         /// <summary>                          
         /// Draw the object.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        void Draw(GameTime gameTime);
+        void Draw(int layer, GameTime gameTime);
 
         /// <summary>
         /// Initialize and setup the object.

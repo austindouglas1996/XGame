@@ -66,14 +66,14 @@ namespace XGameEngine.Graphics.GUI
         /// Draw the border element.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             // Draw the base first.
-            base.Draw(sprite, gameTime);
+            base.Draw(gameTime);
 
             for (int i = 0; i < this.rects.Count; i++)
             {
-                base.Game.WorldRender.SpriteBatch.Draw
+                base.Game.WorldRender.SpriteBatch[Layer].Draw
                     (base.Game.EngineResource.Dummy, this.rects[i], this.Background);
             }
         }

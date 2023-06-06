@@ -56,6 +56,7 @@ namespace XGameEngine.Graphics.GUI
         public UIObject(XGame game)
             : base(game, new Vector2(1,1))
         {
+            base.Layer = 0;
         }
 
         /// <summary>
@@ -213,7 +214,7 @@ namespace XGameEngine.Graphics.GUI
         /// Draw the element.
         /// </summary>
         /// <param name="gameTime"></param>
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             if (this.Visible != Visibility.Visible
                 && !this.IsActive)
@@ -221,11 +222,11 @@ namespace XGameEngine.Graphics.GUI
                 return;
             }
 
-            base.Game.WorldRender.SpriteBatch.Draw
+            base.Game.WorldRender.SpriteBatch[Layer].Draw
                 (base.Game.EngineResource.Dummy, this.Bounds, null, this.background,
                 this.rotation, new Vector2(0, 0), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, this.depth);
 
-            base.Draw(sprite, gameTime);
+            base.Draw(gameTime);
         }
 
         /// <summary>

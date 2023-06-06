@@ -15,7 +15,7 @@ namespace Example01.Logic
 {
     public class PlayerShip : ShipGameObject
     {
-        private TimeSpan TimeBetweenShots = TimeSpan.FromSeconds(0.2);
+        private TimeSpan TimeBetweenShots = TimeSpan.FromSeconds(0.1);
         private TimeSpan LastProjectileShot = TimeSpan.Zero;
 
         public PlayerShip(XGame game, Texture2D texture, ProjectileResource projectile, Vector2 position, Color color) 
@@ -69,9 +69,9 @@ namespace Example01.Logic
             base.Update(gameTime);
         }
 
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
-            base.Draw(sprite, gameTime);
+            base.Draw(gameTime);
         }
 
         private void ShootProjectile()

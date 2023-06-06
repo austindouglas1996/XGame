@@ -41,6 +41,8 @@ namespace Example01.Screens
             this.Background = new Color(0, 0, 0, 70);
 
             LastKnownLives = screen.RemainingLives;
+
+            base.Layer = 0;
         }
 
         /// <summary>
@@ -88,6 +90,7 @@ namespace Example01.Screens
             for (int i = 0; i < LastKnownLives; i++)
             {
                 Sprite s = new Sprite(this.Game, Screen.PlayerResources.LifeIcon, Vector2.Zero, Color.White);
+                s.Layer = 0;
 
                 // Increase the position
                 pos = pos + new Vector2(s.ActualWidth + 20, 0);

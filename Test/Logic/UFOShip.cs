@@ -99,9 +99,9 @@ namespace Example01.Logic
             base.Update(gameTime);
         }
 
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
-            base.Draw(sprite, gameTime);
+            base.Draw(gameTime);
         }
 
         /// <summary>

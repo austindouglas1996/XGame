@@ -70,7 +70,7 @@ namespace XGameEngine.Graphics.GUI
         /// No drawing done here.
         /// </summary>
         /// <param name="gameTime"></param>
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
         }
 

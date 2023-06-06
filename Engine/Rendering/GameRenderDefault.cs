@@ -21,45 +21,47 @@ namespace XGameEngine.Rendering
         public GameRenderDefault(XGame game)
             : base(game)
         {
+            SpriteBatch = new List<SpriteBatch>();
+            SpriteOptions = new List<SpriteBatchRenderOptions>();
         }
 
         /// <summary>
         /// Gets or sets the spritebatch that draws the entities.
         /// </summary>
-        public override SpriteBatch SpriteBatch { get; set; }
+        public override List<SpriteBatch> SpriteBatch { get; set; }
 
         /// <summary>
         /// Gets or sets the sprite options.
         /// </summary>
-        public override SpriteBatchRenderOptions SpriteOptions { get; set; }
+        public override List<SpriteBatchRenderOptions> SpriteOptions { get; set; }
 
         /// <summary>
         /// Starts the sprite operation.
         /// </summary>
-        public override void Begin()
+        public override void Begin(int layer)
         {
-            this.SpriteBatch.Begin
-                (this.SpriteOptions.SortMode, this.SpriteOptions.BlendState,
-                this.SpriteOptions.SamplerState, this.SpriteOptions.DepthStencilState,
-                this.SpriteOptions.RasterizerState, this.SpriteOptions.Effect,
-                this.SpriteOptions.TransformMatrix);
+            this.SpriteBatch[layer].Begin
+                (this.SpriteOptions[layer].SortMode, this.SpriteOptions[layer].BlendState,
+                this.SpriteOptions[layer].SamplerState, this.SpriteOptions[layer].DepthStencilState,
+                this.SpriteOptions[layer].RasterizerState, this.SpriteOptions[layer].Effect,
+                this.SpriteOptions[layer].TransformMatrix);
         }
 
         /// <summary>
         /// Draws the child entities.
         /// </summary>
         /// <param name="gameTime"></param>
-        public override void Draw(GameTime gameTime)
+        public override void Draw(int layer, GameTime gameTime)
         {
-            this.Entities.Draw(this.SpriteBatch, gameTime);
+            this.Entities.Draw(gameTime);
         }
 
         /// <summary>
         /// Ends the current sprite operation.
         /// </summary>
-        public override void End()
+        public override void End(int layer)
         {
-            this.SpriteBatch.End();
+            this.SpriteBatch[layer].End();
         }
 
         /// <summary>
@@ -68,11 +70,18 @@ namespace XGameEngine.Rendering
         public override void Initialize()
         {
             // Initialize sprite.
-            this.SpriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
+            this.SpriteBatch.Add(new SpriteBatch(this.Game.GraphicsDevice));
 
             // Create options.
-            this.SpriteOptions = new SpriteBatchRenderOptions
-                (SpriteSortMode.Deferred, null, null, null, null, null, this.Game.Camera);
+            this.SpriteOptions.Add(new SpriteBatchRenderOptions
+                (SpriteSortMode.Deferred, null, null, null, null, null, null));
+
+            // Initialize sprite.
+            this.SpriteBatch.Add(new SpriteBatch(this.Game.GraphicsDevice));
+
+            // Create options.
+            this.SpriteOptions.Add(new SpriteBatchRenderOptions
+                (SpriteSortMode.Deferred, null, null, null, null, null, this.Game.Camera));
         }
 
         /// <summary>

@@ -204,14 +204,14 @@ namespace Example01
         /// </summary>
         /// <param name="sprite"></param>
         /// <param name="gameTime"></param>
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             this.Primitive.Begin(PrimitiveType.TriangleList);
             for (int i = 0; i < this.Stars.Count; i++)
                 this.Primitive.AddVertex(Stars[i], StarsColors[i]);
             this.Primitive.End();
 
-            base.Draw(sprite, gameTime);
+            base.Draw(gameTime);
         }
 
         /// <summary>

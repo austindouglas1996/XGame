@@ -16,6 +16,6 @@ namespace XGameEngine
         int ID { get; }
         bool IsActive { get; }
         void Update(GameTime gameTime);
-        void Draw(SpriteBatch sprite, GameTime gameTime);
+        void Draw(GameTime gameTime);
     }
 }

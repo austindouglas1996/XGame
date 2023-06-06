@@ -83,7 +83,7 @@ namespace XGameEngine
         /// Adds a new child to the repository.
         /// </summary>
         /// <param name="entity"></param>
-        public void Add(TEntity entity)
+        public virtual void Add(TEntity entity)
         {
             if (Owner != null)
                 entity.Parent = Owner;
@@ -131,10 +131,10 @@ namespace XGameEngine
         /// Draw the entities in the list.
         /// </summary>
         /// <param name="gameTime"></param>
-        public virtual void Draw(SpriteBatch sprite, GameTime gameTime)
+        public virtual void Draw(GameTime gameTime)
         {
             foreach (var entity in this._Entities)
-                entity.Draw(sprite, gameTime);
+                entity.Draw(gameTime);
         }
 
         /// <summary>

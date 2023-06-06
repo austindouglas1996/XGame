@@ -89,9 +89,9 @@ namespace Example01.Screens
                     Game1.World.AddShipPartRandom();
             }
         }
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
-            base.Draw(sprite, gameTime);
+            base.Draw(gameTime);
         }
 
         private void Reset()

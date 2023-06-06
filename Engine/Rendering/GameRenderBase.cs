@@ -41,28 +41,28 @@ namespace XGameEngine.Rendering
         /// <summary>
         /// Object to manage drawing.
         /// </summary>
-        public abstract SpriteBatch SpriteBatch { get; set; }
+        public abstract List<SpriteBatch> SpriteBatch { get; set; }
 
         /// <summary>
         /// Rendering options.
         /// </summary>
-        public abstract SpriteBatchRenderOptions SpriteOptions { get; set; }
+        public abstract List<SpriteBatchRenderOptions> SpriteOptions { get; set; }
 
         /// <summary>
         /// Start draw operation.
         /// </summary>
-        public abstract void Begin();
+        public abstract void Begin(int layer);
 
         /// <summary>
         /// Draw child entries.
         /// </summary>
         /// <param name="gameTime"></param>
-        public abstract void Draw(GameTime gameTime);
+        public abstract void Draw(int layer, GameTime gameTime);
 
         /// <summary>
         /// End the current draw.
         /// </summary>
-        public abstract void End();
+        public abstract void End(int layer);
 
         /// <summary>
         /// Initialize components.

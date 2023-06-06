@@ -37,9 +37,9 @@ namespace Example01.Screens
             base.Initialize();
         }
 
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
-            base.Draw(sprite, gameTime);
+            base.Draw(gameTime);
         }
 
         protected override void UpdateInput(GameTime gameTime)

@@ -144,6 +144,10 @@ namespace Example01.Screens
             if (InputState.KeyPressed(GlobalKeys.LeftSideKey, PlayerIndex.One, StateOptions.CurrentFavor))
                 this.ChangePlaceHolderPosition(-1);
 
+            // Leave
+            if (InputState.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape, PlayerIndex.One, StateOptions.CurrentFavor))
+                base.Game.Screens.Pop();
+
             // Update our center ship.
             this.ShipInfos[2].Sprite.Rotation += 0.02f;
 

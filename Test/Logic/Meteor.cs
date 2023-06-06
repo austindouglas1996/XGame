@@ -18,7 +18,7 @@ namespace Example01.Logic
         /// <summary>
         /// Minimum rotation speed for the meteor.
         /// </summary>
-        private static readonly float RotationSpeedMin = -0.04f;
+        private static readonly float RotationSpeedMin = -0.07f;
 
         /// <summary>
         /// Maximum rotation speed for the meteor.

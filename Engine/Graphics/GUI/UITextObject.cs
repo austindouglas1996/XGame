@@ -95,20 +95,20 @@ namespace XGameEngine.Graphics.GUI
         /// Draw the text.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
-            base.Draw(sprite, gameTime);
+            base.Draw(gameTime);
 
             if (base.Visible == Visibility.Visible)
             {
                 Vector2 origin = new Vector2(this.ActualWidth / 2, this.ActualHeight / 2);
 
-                base.Game.WorldRender.SpriteBatch.DrawString
+                base.Game.WorldRender.SpriteBatch[Layer].DrawString
                     (this.font, this.text, this.ScreenPosition, this.foreground, this.Rotation,
                     new Vector2(-3,0), this.Scale, SpriteEffects.None, 1f);
 
                 foreach (var effect in this.TextEffects)
-                    effect.Draw(sprite, gameTime);
+                    effect.Draw(gameTime);
             }
         }
 

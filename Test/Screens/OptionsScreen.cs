@@ -45,6 +45,10 @@ namespace Example01.Screens
             {
                 Game1.World.AddUFORandom();
             }
+
+            // Leave
+            if (InputState.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape, PlayerIndex.One, StateOptions.CurrentFavor))
+                base.Game.Screens.Pop();
         }
     }
 }

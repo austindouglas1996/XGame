@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using XGameEngine.Common;
 using XGameEngine.Core;
 
 namespace XGameEngine
@@ -44,6 +45,11 @@ namespace XGameEngine
         private string name = string.Empty;
 
         /// <summary>
+        /// Drawing layer to use.
+        /// </summary>
+        private int layer = 1;
+
+        /// <summary>
         /// Specifies the current display state.
         /// </summary>
         private Visibility visible = Visibility.Visible;
@@ -62,7 +68,7 @@ namespace XGameEngine
         {
             this.game = game;
 
-            this.Children = new ListRepository<GameObject>();
+            this.Children = new ChildrenRepository(this);
             this.Children.Owner = this;
 
             this.Position = position;
@@ -140,12 +146,12 @@ namespace XGameEngine
         /// <summary>
         /// Gets or sets the list of children this object contains.
         /// </summary>
-        public ListRepository<GameObject> Children
+        public ChildrenRepository Children
         {
             get { return _Children; }
             set { _Children = value; }
         }
-        private ListRepository<GameObject> _Children;
+        private ChildrenRepository _Children;
 
         /// <summary>
         /// Gets or sets the object display state.
@@ -154,6 +160,27 @@ namespace XGameEngine
         {
             get { return this.visible; }
             set { this.visible = value; this.OnVisibilityChange(EventArgs.Empty); }
+        }
+
+        /// <summary>
+        /// Decides what layer (or spritebatch to use when drawing)
+        /// 0 = ui
+        /// 1 = world.
+        /// </summary>
+        public int Layer
+        {
+            get
+            {
+                //if (this.Parent != null)
+                    //return this.Parent.layer;
+
+                return this.layer; 
+            }
+
+            set 
+            { 
+                this.layer = value; 
+            }
         }
 
         /// <summary>
@@ -221,7 +248,7 @@ namespace XGameEngine
         /// Draw the game object.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public virtual void Draw(SpriteBatch sprite, GameTime gameTime)
+        public virtual void Draw(GameTime gameTime)
         {
             // Make sure we have been initialized.
             if (!this.IsInitialized)
@@ -238,7 +265,7 @@ namespace XGameEngine
                 this.firstDraw = true;
             }
 
-            this.Children.Draw(sprite, gameTime);
+            this.Children.Draw(gameTime);
         }
 
         /// <summary>

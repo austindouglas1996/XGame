@@ -101,15 +101,6 @@ namespace XGameEngine
         private IGameRenderer worldrender;
 
         /// <summary>
-        /// Helps with rendering UI elements.
-        /// </summary>
-        public IGameRenderer UIRender
-        {
-            get { return this.uirender; }
-        }
-        private IGameRenderer uirender;
-
-        /// <summary>
         /// Gets the engines content within the assembly.
         /// </summary>
         public ResourceLoader EngineResource
@@ -141,13 +132,11 @@ namespace XGameEngine
             // Update the frame count.
             this.frameCounter.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
-            this.uirender.Begin();
-            this.uirender.Draw(gameTime);
-            this.uirender.End();
-
-            this.worldrender.Begin();
-            this.worldrender.Draw(gameTime);
-            this.worldrender.End();
+            this.worldrender.Begin(0);
+            this.worldrender.Begin(1);
+            this.worldrender.Draw(1, gameTime);
+            this.worldrender.End(1);
+            this.worldrender.End(0);
 
             base.Draw(gameTime);
         }
@@ -162,11 +151,9 @@ namespace XGameEngine
             graphics.ApplyChanges();
 
             // Initialize render.
-            this.uirender = new GameRenderDefault(this);
             this.worldrender = new GameRenderDefault(this);
 
             // Initialize render.
-            this.uirender.Initialize();
             this.worldrender.Initialize();
 
             // Initialize the screens.
@@ -195,8 +182,7 @@ namespace XGameEngine
 
             // Create a basic camera.
             this.camera = new SimpleCamera(this.GraphicsDevice.Viewport);
-            this.worldrender.SpriteOptions.Camera = this.camera;
-
+            this.worldrender.SpriteOptions[1].Camera = this.camera;
         }
 
         /// <summary>

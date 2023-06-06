@@ -48,7 +48,7 @@ namespace XGameEngine.Managers
         /// Draw the currently active screen.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             // Make sure Initialize() has been called.
             if (!this.IsInitialized)
@@ -82,7 +82,7 @@ namespace XGameEngine.Managers
                     continue;
                 }
 
-                drawable[i].Draw(sprite, gameTime);
+                drawable[i].Draw(gameTime);
             }
         }
 

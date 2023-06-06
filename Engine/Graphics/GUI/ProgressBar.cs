@@ -96,10 +96,10 @@ namespace XGameEngine.Graphics.GUI
         /// </summary>
         /// <param name="sprite"></param>
         /// <param name="gameTime"></param>
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
-            base.Draw(sprite, gameTime);
-            sprite.Draw(base.Game.EngineResource.Dummy, _Bar, _Progress);
+            base.Draw(gameTime);
+            Game.WorldRender.SpriteBatch[Layer].Draw(base.Game.EngineResource.Dummy, _Bar, _Progress);
         }
 
         /// <summary>

@@ -215,7 +215,7 @@ namespace XGameEngine.Graphics
         /// Draw the sprite.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             // Make sure the texture is not null.
             if (this.texture == null)
@@ -223,11 +223,11 @@ namespace XGameEngine.Graphics
                 return;
             }
 
-            base.Game.WorldRender.SpriteBatch.Draw
+            base.Game.WorldRender.SpriteBatch[base.Layer].Draw
                 (this.texture, this.ScreenPosition, null, this.color,
                 this.rotation, this.Center, this.scale, this.effects, this.depth);
 
-            base.Draw(sprite, gameTime);
+            base.Draw(gameTime);
         }
 
         /// <summary>

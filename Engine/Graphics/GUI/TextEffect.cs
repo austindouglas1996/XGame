@@ -42,7 +42,7 @@ namespace XGameEngine.Graphics.GUI
         /// Draw the control.
         /// </summary>
         /// <param name="gameTime"></param>
-        public abstract void Draw(SpriteBatch sprite, GameTime gameTime);
+        public abstract void Draw(GameTime gameTime);
 
         /// <summary>
         /// Update the control.

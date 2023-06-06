@@ -153,13 +153,13 @@ namespace XGameEngine.Graphics.GUI
         /// Draw the title along with sub items.
         /// </summary>
         /// <param name="gameTime"></param>
-        public override void Draw(SpriteBatch sprite, GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             if (this.Options.SelectedEffect != null)
-                this.Options.SelectedEffect.Draw(sprite, gameTime);
+                this.Options.SelectedEffect.Draw(gameTime);
 
-            this.Items.Draw(sprite, gameTime);
-            base.Draw(sprite, gameTime);
+            this.Items.Draw(gameTime);
+            base.Draw(gameTime);
         }
 
         /// <summary>
