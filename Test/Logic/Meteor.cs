@@ -203,8 +203,8 @@ namespace Example01.Logic
                 switch (this.Resource.Size)
                 {
                     case MeteorSize.Big:
-                        max = 4;
-                        min = 3;
+                        max = 6;
+                        min = 4;
                         break;
                     case MeteorSize.Medium:
                         max = 3;

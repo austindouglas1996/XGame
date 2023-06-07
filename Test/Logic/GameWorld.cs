@@ -21,8 +21,8 @@ namespace Example01
         public GameWorld(XGame game) 
             : base(game, Vector2.Zero)
         {
-            WorldWidth = 2000;
-            WorldHeight = 2000;
+            WorldWidth = 3000;
+            WorldHeight = 4000;
         }
 
         public int WorldWidth { get; set; }

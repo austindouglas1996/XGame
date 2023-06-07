@@ -15,7 +15,7 @@ namespace Example01.Logic
 {
     public class PlayerShip : ShipGameObject
     {
-        private TimeSpan TimeBetweenShots = TimeSpan.FromSeconds(0.1);
+        private TimeSpan TimeBetweenShots = TimeSpan.FromSeconds(0.4);
         private TimeSpan LastProjectileShot = TimeSpan.Zero;
 
         public PlayerShip(XGame game, Texture2D texture, ProjectileResource projectile, Vector2 position, Color color) 
@@ -32,7 +32,7 @@ namespace Example01.Logic
         }
         private ProjectileResource _Projectile;
 
-        public float RotationSpeed = 0.04f;
+        public float RotationSpeed = 0.06f;
 
         public override void Update(GameTime gameTime)
         {
@@ -64,7 +64,7 @@ namespace Example01.Logic
                 }
             }
 
-            this.Game.Camera.Position = this.Position - new Vector2(800,800);
+            this.Game.Camera.Position = this.Position - new Vector2(625, 500);
 
             base.Update(gameTime);
         }
