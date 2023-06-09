@@ -59,16 +59,26 @@ namespace Example01.Logic
                 int r = random.Next(20, 255);
                 int g = random.Next(0, 255);
                 int b = random.Next(0, 255);
-                int a = random.Next(50, 250);
+                int a = random.Next(20, 255);
+
+                // Change the size but anything above 0.6f seems too big.
+                float scale = 0.6f;
+
+                // Super star?
+                int big = random.Next(1, 100);
+                if (big == 99)
+                {
+                    a = 250;
+                    scale = 1.0f;
+                }
+
 
                 // Random position.
                 Vector2 pos = new Vector2(random.Next(minX, maxX), random.Next(minY, maxY));
 
                 // New star.
                 Sprite newStar = new Sprite(base.Game, Resources.GetRandomStar(), pos, new Color(r, g, b, a));
-
-                // Change the size but anything above 0.6f seems too big.
-                newStar.Scale = 0.7f;
+                newStar.Scale = scale;
 
                 // Add the star.
                 this._Stars.Add(newStar);
