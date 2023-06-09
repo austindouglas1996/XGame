@@ -12,15 +12,17 @@ namespace Example01.Logic
 {
     public abstract class Projectile : SpaceGameObject
     {
-        protected Projectile(XGame game, Texture2D texture, Vector2 position, Vector2 velocity, Color color) 
+        protected Projectile(XGame game, Texture2D texture, Vector2 position, Vector2 velocity, TimeSpan lifeSpan, Color color) 
             : base(game, texture, position, color)
         {
+            this.LifeSpan = lifeSpan;
             base.Velocity = velocity;
         }
 
-        protected Projectile(XGame game, Texture2D texture, Vector2 position, Vector2 velocity, Color color, float rotation, float scale, SpriteEffects effects, float depth) 
+        protected Projectile(XGame game, Texture2D texture, Vector2 position, Vector2 velocity, TimeSpan lifeSpan, Color color, float rotation, float scale, SpriteEffects effects, float depth) 
             : base(game, texture, position, color, rotation, scale, effects, depth)
         {
+            this.LifeSpan = LifeSpan;
             base.Velocity = velocity;
         }
 
@@ -32,7 +34,7 @@ namespace Example01.Logic
             LifeSpan -= gameTime.ElapsedGameTime;
 
             // No more projectile.
-            if (LifeSpan.TotalMilliseconds == 0)
+            if (LifeSpan.TotalMilliseconds < 0)
                 this.IsActive = false;
 
             base.Update(gameTime);

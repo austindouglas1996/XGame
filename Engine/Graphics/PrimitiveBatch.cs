@@ -67,6 +67,7 @@ namespace XGameEngine.Graphics
         /// Initializes a new instnace of the <see cref="PrimitiveBatch"/> class.
         /// </summary>
         /// <param name="device">The device to be used for draw calls.</param>
+        /// <param name="camera">The camera the the primitivebatch should work around.</param>
         public PrimitiveBatch(GraphicsDevice device)
         {
             // Make sure device is not null.
@@ -83,7 +84,6 @@ namespace XGameEngine.Graphics
             this.basicEffect = new BasicEffect(this.device);
             this.basicEffect.VertexColorEnabled = true;
             
-
             // Set projection as a orthographic.
             this.basicEffect.Projection = Matrix.CreateOrthographicOffCenter
                 (0, this.device.Viewport.Width,
@@ -156,7 +156,6 @@ namespace XGameEngine.Graphics
 
             // Begin basicEffect.
             this.basicEffect.CurrentTechnique.Passes[0].Apply();
-
 
             // We have begun. User can not call 'AddVertex', 'Flush', and 'End'.
             this.hasBegun = true;

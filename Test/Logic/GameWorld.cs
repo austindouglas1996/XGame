@@ -36,12 +36,7 @@ namespace Example01
         /// <summary>
         /// List of initialized stars.
         /// </summary>
-        private List<Vector2> Stars = new List<Vector2>();
-
-        /// <summary>
-        /// List of star colors.
-        /// </summary>
-        private List<Color> StarsColors = new List<Color>();
+        private List<Star> Stars = new List<Star>();
 
         public PlayerShip Player { get; set; }
 
@@ -171,15 +166,15 @@ namespace Example01
                 int b = rand.Next(0, 255);
                 int a = rand.Next(0, 255);
 
-                // The stars are made of triangles so add 3.
-                Stars.Add(new Vector2(x, y));
-                Stars.Add(new Vector2(x + size, y + size));
-                Stars.Add(new Vector2(x - size, y + size));
+                Star star = new Star();
+                star.V1 = new Vector2(x, y);
+                star.V2 = new Vector2(x + size, y + size);
+                star.V3 = new Vector2(x - size, y + size);
+                star.V1C = new Color(a, a, a);
+                star.V2C = new Color(a, a, a);
+                star.V3C = new Color(a, a, b);
 
-                // Add 3 colors.
-                StarsColors.Add(new Color(a, a, a));
-                StarsColors.Add(new Color(a, a, a));
-                StarsColors.Add(new Color(a, a, b));
+                Stars.Add(star);
             }
 
             base.Initialize();
@@ -207,10 +202,21 @@ namespace Example01
         public override void Draw(GameTime gameTime)
         {
             this.Primitive.Begin(PrimitiveType.TriangleList);
-            for (int i = 0; i < this.Stars.Count; i++)
-                this.Primitive.AddVertex(Stars[i], StarsColors[i]);
-            this.Primitive.End();
 
+            for (int i = 0; i < this.Stars.Count; i++)
+            {
+                var camera = base.Game.Camera;
+
+                Vector2 a = Stars[i].V1 - camera.Position;
+                Vector2 b = Stars[i].V2 - camera.Position;
+                Vector2 c = Stars[i].V3 - camera.Position;
+
+                this.Primitive.AddVertex(a, Stars[i].V1C);
+                this.Primitive.AddVertex(b, Stars[i].V2C);
+                this.Primitive.AddVertex(c, Stars[i].V3C);
+            }
+
+            this.Primitive.End();
             base.Draw(gameTime);
         }
 

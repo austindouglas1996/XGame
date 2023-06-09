@@ -12,13 +12,13 @@ namespace Example01.Logic
     public class ShipProjectile : Projectile
     {
         public ShipProjectile(XGame game, ShipGameObject ship, ProjectileResource model, Vector2 position, Vector2 velocity, Color color) 
-            : base(game, model.Texture, position, velocity, color)
+            : base(game, model.Texture, position, velocity, TimeSpan.FromSeconds(7), color)
         {
             Ship = ship;
         }
 
         public ShipProjectile(XGame game, ShipGameObject ship, ProjectileResource model, Vector2 position, Vector2 velocity, Color color, float rotation, float scale, SpriteEffects effects, float depth) 
-            : base(game, model.Texture, position, velocity, color, rotation, scale, effects, depth)
+            : base(game, model.Texture, position, velocity, TimeSpan.FromSeconds(7), color, rotation, scale, effects, depth)
         {
             Ship = ship;
         }
@@ -36,7 +36,7 @@ namespace Example01.Logic
             this.Velocity = new Vector2(
                 (float)Math.Cos(Ship.Rotation - (float)MathHelper.PiOver2),
                 (float)Math.Sin(Ship.Rotation - (float)MathHelper.PiOver2))
-                * 3f + Ship.Velocity;
+                * 13f + Ship.Velocity;
 
             this.Rotation = Ship.Rotation;
 
