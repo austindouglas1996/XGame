@@ -15,7 +15,7 @@ namespace Example01.Logic
 {
     public class PlayerShip : ShipGameObject
     {
-        private TimeSpan TimeBetweenShots = TimeSpan.FromSeconds(0.4);
+        private TimeSpan TimeBetweenShots = TimeSpan.FromSeconds(0.3);
         private TimeSpan LastProjectileShot = TimeSpan.Zero;
 
         public PlayerShip(XGame game, Texture2D texture, ProjectileResource projectile, Vector2 position, Color color) 

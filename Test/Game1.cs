@@ -50,6 +50,8 @@ namespace Example01
 
             World = new GameWorld(this);
             World.Initialize();
+
+            base.WorldRender.SpriteOptions[1].BlendState = BlendState.NonPremultiplied;
             base.WorldRender.Entities.Add(World);
 
             this.Screens.Push(new MainMenu(this));

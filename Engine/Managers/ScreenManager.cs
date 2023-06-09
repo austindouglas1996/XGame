@@ -84,6 +84,8 @@ namespace XGameEngine.Managers
 
                 drawable[i].Draw(gameTime);
             }
+
+            base.Draw(gameTime);
         }
 
         /// <summary>

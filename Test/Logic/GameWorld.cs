@@ -15,6 +15,11 @@ namespace Example01
     public class GameWorld : GameObject
     {
         /// <summary>
+        /// Manages the stars we see in the world.
+        /// </summary>
+        private StarManager _Stars;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="GameWorld"/> class.
         /// </summary>
         /// <param name="game"></param>
@@ -29,15 +34,8 @@ namespace Example01
         public int WorldHeight { get; set; }
 
         /// <summary>
-        /// Handls rendering the background stars.
+        /// Represents the player.
         /// </summary>
-        private PrimitiveBatch Primitive;
-
-        /// <summary>
-        /// List of initialized stars.
-        /// </summary>
-        private List<Star> Stars = new List<Star>();
-
         public PlayerShip Player { get; set; }
 
         /// <summary>
@@ -144,38 +142,8 @@ namespace Example01
         /// </summary>
         public override void Initialize()
         {
-            Random rand = new Random();
-            this.Primitive = new PrimitiveBatch(base.Game.GraphicsDevice);
-
-            for (int i = 0; i < 1500; i++)
-            {
-                // Width and height of the game.
-                int width = WorldWidth;
-                int height = WorldHeight;
-
-                // Size of the stars.
-                int size = rand.Next(1, 2);
-
-                // Positions of the star.
-                int x = rand.Next(0, width);
-                int y = rand.Next(0, height);
-
-                // Color of the star.
-                int r = rand.Next(0, 255);
-                int g = rand.Next(0, 255);
-                int b = rand.Next(0, 255);
-                int a = rand.Next(0, 255);
-
-                Star star = new Star();
-                star.V1 = new Vector2(x, y);
-                star.V2 = new Vector2(x + size, y + size);
-                star.V3 = new Vector2(x - size, y + size);
-                star.V1C = new Color(a, a, a);
-                star.V2C = new Color(a, a, a);
-                star.V3C = new Color(a, a, b);
-
-                Stars.Add(star);
-            }
+            _Stars = new StarManager(base.Game, this, base.Game.Camera);
+            _Stars.AddStars(1500);
 
             base.Initialize();
         }
@@ -187,7 +155,15 @@ namespace Example01
         public override void Update(GameTime gameTime)
         {
             foreach (var child in this.Children.GetAll())
+            {
+                var spaceObj = child as SpaceGameObject;
+                if (spaceObj == null)
+                {
+                    //continue;
+                }
+
                 child.Position = CheckAndResetChildBounds((SpaceGameObject)child);
+            }
 
             HandleCollisons(gameTime);
 
@@ -201,22 +177,7 @@ namespace Example01
         /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
-            this.Primitive.Begin(PrimitiveType.TriangleList);
-
-            for (int i = 0; i < this.Stars.Count; i++)
-            {
-                var camera = base.Game.Camera;
-
-                Vector2 a = Stars[i].V1 - camera.Position;
-                Vector2 b = Stars[i].V2 - camera.Position;
-                Vector2 c = Stars[i].V3 - camera.Position;
-
-                this.Primitive.AddVertex(a, Stars[i].V1C);
-                this.Primitive.AddVertex(b, Stars[i].V2C);
-                this.Primitive.AddVertex(c, Stars[i].V3C);
-            }
-
-            this.Primitive.End();
+            _Stars.Draw(gameTime);
             base.Draw(gameTime);
         }
 

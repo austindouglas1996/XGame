@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using XGameEngine;
@@ -35,6 +36,7 @@ namespace Example01
         public static List<ResourceInfo<Texture2D>> ShipPartsTextures = new List<ResourceInfo<Texture2D>>();
         public static List<ResourceInfo<Texture2D>> MeteorTextures = new List<ResourceInfo<Texture2D>>();
         public static List<ResourceInfo<Texture2D>> NumberTextures = new List<ResourceInfo<Texture2D>>();
+        public static List<ResourceInfo<Texture2D>> Stars = new List<ResourceInfo<Texture2D>>();
 
         public static List<Song> ProjectileSounds = new List<Song>();
 
@@ -59,6 +61,10 @@ namespace Example01
             NumberTextures = LoadTextures(resource, ExeDir + @"\Content\Textures\UI\Numbers\", "Numbers");
             ShipPartsTextures = LoadTextures(resource, ExeDir + @"\Content\Textures\ShipParts\", "ShipParts");
 
+            // Load effects
+            Stars = LoadTextures(resource, ExeDir + @"\Content\Textures\Effects\Stars\", "Stars");
+
+
             // Load projectile sound.
             ProjectileSounds.Add(resource.Load<Song>(@"sfx_laser1"));
 
@@ -67,6 +73,12 @@ namespace Example01
             CreateProjectileResources();
             CreateMeteorResources();
             CreateUFOResources();
+        }
+
+        public static Texture2D GetRandomStar()
+        {
+            Random rand = new Random();
+            return Resources.Stars[rand.Next(0, Resources.Stars.Count())].Resource;
         }
 
         /// <summary>
