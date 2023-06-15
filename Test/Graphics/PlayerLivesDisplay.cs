@@ -70,6 +70,14 @@ namespace Example01.Screens
             base.Update(gameTime);
         }
 
+        public override void Draw(GameTime gameTime)
+        {
+            if (!this.Screen.Player.IsActive)
+                return;
+
+            base.Draw(gameTime);
+        }
+
         /// <summary>
         /// The known lives has changed so we'll reset the controls.
         /// </summary>

@@ -64,6 +64,15 @@ namespace Example01.Screens
                 Game1.World.AddUFORandom();
             }
 
+            if (!Player.IsActive && this.RemainingLives > 0)
+            {
+                Reset(); 
+            }
+            else if (!Player.IsActive && this.RemainingLives <= 0)
+            {
+                base.Game.Screens.Push(new GameOverScreen(this));
+            }
+
             base.Update(gameTime);
         }
         protected override void UpdateInput(GameTime gameTime)

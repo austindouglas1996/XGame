@@ -55,6 +55,14 @@ namespace Example01.Graphics
             base.Initialize();
         }
 
+        public override void Draw(GameTime gameTime)
+        {
+            if (!this.Screen.Player.IsActive)
+                return;
+
+            base.Draw(gameTime);
+        }
+
         public override void Update(GameTime gameTime)
         {
             if (Player != null)
