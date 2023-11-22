@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XGameEngine;
 
 namespace MazeGame.Logic
 {
-    public class MazeExtender
+    public class MazeExtender : GameObject
     {
         private Maze _Maze;
         private int moves = 0;
@@ -17,7 +18,8 @@ namespace MazeGame.Logic
         private TimeSpan _updateTime = TimeSpan.FromMilliseconds(200);
         private TimeSpan lastUpdateTime = TimeSpan.Zero;
 
-        public MazeExtender(Maze maze, int moves)
+        public MazeExtender(XGame game, Maze maze, int moves)
+            : base(game, Vector2.Zero)
         {
             _Maze = maze;
             this.moves = moves;
@@ -35,10 +37,10 @@ namespace MazeGame.Logic
 
         public void Update(GameTime gameTime)
         {
-            if (gameTime.TotalGameTime - lastUpdateTime > _updateTime && moves != 0)
+            if (gameTime.TotalGameTime - lastUpdateTime > _updateTime && moves > 0)
             {
                 ExtendMaze();
-                moves = moves--;
+                moves -= 1;
                 lastUpdateTime = gameTime.TotalGameTime;
             }
         }
@@ -48,17 +50,24 @@ namespace MazeGame.Logic
             Random rnd = new Random();
 
             Move nextMove = Move.Back;
-            List<Move> possibleMoves = new List<Move>()
-            {
-                    Move.Back,
-                    Move.Forward,
-                    Move.Left,
-                    Move.Right,
-            };
+
+            Dictionary<Move, int> possibleMoves = new Dictionary<Move, int>();
+            possibleMoves.Add(Move.Nothing, 95);
+            possibleMoves.Add(Move.Back, 80);
+            possibleMoves.Add(Move.Forward, 60);
+            possibleMoves.Add(Move.Left, 40);
+            possibleMoves.Add(Move.Right, 20);
 
             while (possibleMoves.Count > 0)
             {
-                nextMove = possibleMoves.ElementAt(rnd.Next(0, possibleMoves.Count));
+                int nextMovePercent = rnd.Next(0, 100);
+                nextMove = possibleMoves.FirstOrDefault(r => r.Value < nextMovePercent).Key;
+
+                if (nextMove == Move.Nothing)
+                {
+                    break;
+                }
+
                 Vector2 nextTile = _Maze.ModifyPosition(CurrentTile, nextMove);
 
                 if (_Maze.IsValidMove(nextTile, nextMove))
@@ -87,8 +96,8 @@ namespace MazeGame.Logic
             // No tile found, go back.
             if (this.VisitedHistory.Count > 0)
             {
-                this.CurrentTile = this.VisitedHistory.Last();
-                this.VisitedHistory.Remove(this.VisitedHistory.Last());
+                this.CurrentTile = this.VisitedHistory.ElementAt(rnd.Next(0, this.VisitedHistory.Count));
+                this.VisitedHistory.Remove(this.CurrentTile);
                 this.ExtendMaze();
             }
         }

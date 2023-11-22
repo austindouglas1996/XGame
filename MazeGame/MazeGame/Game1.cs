@@ -4,20 +4,18 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using XGameEngine;
 
 namespace MazeGame
 {
-    public class Game1 : Game
+    public class Game1 : XGame
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private Maze _maze = new Maze();
+        private Maze _maze;
 
         public Game1()
+            : base(2000,1000, "MazeGame")
         {
-            _graphics = new GraphicsDeviceManager(this);
-            _graphics.PreferredBackBufferWidth = 1200;
-            _graphics.PreferredBackBufferHeight = 1000;
+            _maze = new Maze(this);
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -25,39 +23,25 @@ namespace MazeGame
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
-
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _maze.GenerateMaze(_graphics.GraphicsDevice);
+            base.LoadContent();
 
-            // TODO: use this.Content to load your game content here
+            base.WorldRender.Entities.Add(_maze);
+            _maze.GenerateMaze(base.Graphics.GraphicsDevice);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            _maze.Update(gameTime);
-
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            _spriteBatch.Begin();
-            _maze.Draw(gameTime, _spriteBatch);
-            _spriteBatch.End();
+            GraphicsDevice.Clear(new Color(33, 30, 36));
 
             base.Draw(gameTime);
         }

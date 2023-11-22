@@ -8,9 +8,10 @@ namespace MazeGame.Logic
 {
     public enum Move
     {
+        Nothing = -1,
         Back = 0,
         Left = 1,
         Forward = 2,
-        Right = 3
+        Right = 3,
     }
 }

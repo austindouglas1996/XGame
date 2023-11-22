@@ -3,25 +3,28 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XGameEngine;
 
 namespace MazeGame.Logic
 {
-    public class Maze
+    public class Maze : GameObject
     {
         private Dictionary<Vector2, Square> MazeTiles = new Dictionary<Vector2, Square>();
         private MazeExtender extender;
 
-        public int Rows { get; set; } = 20;
+        public int Rows { get; set; } = 15;
         public int Columns { get; set; } = 20;
         public int ZLevels { get; set; } = 1;
 
         public Vector2 StartPosition { get; set; } = new Vector2(50, 50);
         public Vector2 BufferPosition { get; set; } = new Vector2(10, 10);
 
-        public Maze() 
+        public Maze(XGame game) 
+            : base(game, Vector2.Zero)
         {
         }
 
@@ -36,10 +39,9 @@ namespace MazeGame.Logic
                     Color color = Color.White;
                     Vector2 pos = GetPosition(r, c);
 
-                    Square sq = new Square(gd);
+                    Square sq = new Square(base.Game);
                     sq.Color = color;
                     sq.Position = pos;
-                    sq.Size = new Vector2(50, 50);
 
                     if (rnd.Next(0, 100) < 10)
                     {
@@ -51,50 +53,7 @@ namespace MazeGame.Logic
                 }
             }
 
-            extender = new MazeExtender(this, 50);
-
-            /*
-            Vector2 rootTile = new Vector2(rnd.Next(0, 10), rnd.Next(0, 10));
-            Vector2 lastTile = new Vector2(0, 0);
-            Vector2 currentTile = rootTile;
-            ChangeTileState(true, currentTile, Color.Red);
-
-            for (int m = 0; m < 90; m++)
-            {
-                Move nextMove = Move.Back;
-                List<Move> possibleMoves = new List<Move>()
-                {
-                    Move.Back,
-                    Move.Forward,
-                    Move.Left,
-                    Move.Right,
-                };
-
-                while (true)
-                {
-                    if (possibleMoves.Count == 0)
-                    {
-                        break;
-                    }
-
-                    nextMove = possibleMoves.ElementAt(rnd.Next(0, possibleMoves.Count));
-
-                    Vector2 temp = ModifyPosition(currentTile, nextMove);
-                    if (IsValidMove(ModifyPosition(currentTile, nextMove), nextMove))
-                    {
-                        currentTile = temp;
-                        break;
-                    }
-                    else
-                    {
-                        // Don't try that move again.
-                        possibleMoves.Remove(nextMove);
-                    }
-                }
-
-                ChangeTileState(true, currentTile, Color.Orange);
-            }
-            */
+            extender = new MazeExtender(base.Game, this, 50);
         }
 
         public void ChangeTileState(bool isActive, Vector2 pos)
@@ -125,7 +84,7 @@ namespace MazeGame.Logic
         /// Update the tiles.
         /// </summary>
         /// <param name="gameTime"></param>
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             extender.Update(gameTime);
             foreach (KeyValuePair<Vector2,Square> square in MazeTiles)
@@ -139,11 +98,11 @@ namespace MazeGame.Logic
         /// </summary>
         /// <param name="gameTime"></param>
         /// <param name="spriteBatch"></param>
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime)
         {
             foreach (KeyValuePair<Vector2, Square> square in MazeTiles)
             {
-                square.Value.Draw(gameTime, spriteBatch);
+                square.Value.Draw(gameTime);
             }
         }
 

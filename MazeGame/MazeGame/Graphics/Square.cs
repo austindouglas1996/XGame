@@ -5,37 +5,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XGameEngine;
+using XGameEngine.Graphics;
 
 namespace MazeGame.Graphics
 {
-    public class Square
+    public class Square : Sprite
     {
-        private static Texture2D _BlankTexture;
-
-        public Square(GraphicsDevice device) 
+        public Square(XGame game) 
+            : base(game)
         {
-            if (_BlankTexture == null)
-            {
-                _BlankTexture = new Texture2D(device, 1, 1);
-                _BlankTexture.SetData(new Color[] { Color.White });
-            }
+            base.Texture = game.EngineResource.Dummy;
+            base.Scale = 1f;
         }
-
-        public Color Color { get; set; }
-        public Vector2 Position { get; set; }
-        public Vector2 Size { get; set; }
 
         public bool Activated { get; set; } = false;
         public bool Disabled { get; set; } = false;
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-
+            base.Update(gameTime);
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch sprite)
+        public override void Draw(GameTime gameTime)
         {
-            sprite.Draw(_BlankTexture, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y), Color);
+            base.Draw(gameTime);
         }
     }
 }
